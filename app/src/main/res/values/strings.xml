@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">RepItOut</string>
+    <string name="Message">Enter your Login Details</string>
+    <string name="Email">Email Address</string>
+    <string name="Password">Password</string>
+    <string name="logBtn">Log in</string>
+    <string name="registerBtn">Register</string>
+    <string name="title_activity_nav">Nav</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="menu_Workout_Routines">Workout Routines</string>
+    <string name="menu_Exercises">Exercises</string>
+    <string name="menu_My_Profile">My Profile</string>
+    <string name="Menu_Progress">View Progress</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+    <string name="title_activity_register">Register</string>
+    <string name="Details">Please enter your details</string>
+    <string name="ProfileNameTV">Name</string>
+    <string name="ProfilePhoneTV">Phone</string>
+    <string name="logPassword">Password</string>
+    <string name="confPassword">Confirm Password</string>
+    <string name="btnUserReg">Register</string>
+</resources>

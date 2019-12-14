@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1039564053953",
+    "firebase_url": "https://repitout.firebaseio.com",
+    "project_id": "repitout",
+    "storage_bucket": "repitout.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1039564053953:android:7754424bf073320b40e340",
+        "android_client_info": {
+          "package_name": "com.example.repitout"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1039564053953-a392kgu063gkf585qu44bdvhvk23ir61.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.repitout",
+            "certificate_hash": "e435564d5bd5030bd80e0fb285877336f068149c"
+          }
+        },
+        {
+          "client_id": "1039564053953-g5vbknj7b23t03k8q0na2ll3afsikn1k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGGen31NzIJ9Npkt1ZEYpDZflYHxMoNIk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1039564053953-g5vbknj7b23t03k8q0na2ll3afsikn1k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

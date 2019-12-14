@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="0dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="30dp">
+
+        <TextView
+            android:id="@+id/Details"
+            android:layout_width="350dp"
+            android:layout_height="30dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="200dp"
+            android:text="@string/Details"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="22sp" />
+
+        <EditText
+            android:id="@+id/etNameUserReg"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/Details"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:ems="10"
+            android:hint="@string/ProfileNameTV"
+            android:inputType="textPersonName"
+            android:paddingLeft="5dp"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/etPhoneUserReg"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/etNameUserReg"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:ems="10"
+            android:hint="@string/ProfilePhoneTV"
+            android:inputType="phone"
+            android:paddingLeft="5dp"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/etEmailUserReg"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:layout_below="@id/etPhoneUserReg"
+            android:textSize="20sp"
+            android:ems="10"
+            android:paddingLeft="5dp"
+            android:hint="@string/Email"
+            android:inputType="textEmailAddress"/>
+
+        <EditText
+            android:id="@+id/etPassUserReg"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/etEmailUserReg"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:ems="10"
+            android:hint="@string/logPassword"
+            android:inputType="textPassword"
+            android:paddingLeft="5dp"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/etConfPassUserReg"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/etPassUserReg"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:ems="10"
+            android:hint="@string/confPassword"
+            android:inputType="textPassword"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/btnUserReg"
+            android:layout_width="160dp"
+            android:layout_height="60dp"
+            android:layout_below="@id/etConfPassUserReg"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="25dp"
+            android:text="@string/btnUserReg"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+
+    </RelativeLayout>
+</ScrollView>
