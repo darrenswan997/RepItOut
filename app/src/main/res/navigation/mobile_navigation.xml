@@ -40,4 +40,28 @@
         android:name="com.example.repitout.ui.send.SendFragment"
         android:label="@string/menu_send"
         tools:layout="@layout/fragment_send" />
+
+    <fragment
+        android:id="@+id/nav_routines"
+        android:name="com.example.repitout.ui.routines.RoutinesFragment"
+        android:label="@string/menu_Workout_Routines"
+        tools:layout="@layout/routines_fragment" />
+
+    <fragment
+        android:id="@+id/nav_exercise"
+        android:name="com.example.repitout.ui.exercises.ExercisesFragment"
+        android:label="@string/menu_Exercises"
+        tools:layout="@layout/exercises_fragment" />
+
+    <fragment
+        android:id="@+id/nav_my_profile"
+        android:name="com.example.repitout.ui.profile.ProfileFragment"
+        android:label="@string/menu_My_Profile"
+        tools:layout="@layout/profile_fragment" />
+
+    <fragment
+        android:id="@+id/nav_my_progress"
+        android:name="com.example.repitout.ui.progress.ProgressFragment"
+        android:label="@string/Menu_Progress"
+        tools:layout="@layout/progress_fragment" />
 </navigation>

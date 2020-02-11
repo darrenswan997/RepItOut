@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view"
+    >
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_routines"
+            android:icon="@drawable/ic_dumbell"
+            android:title="@string/menu_Workout_Routines" />
+        <item
+            android:id="@+id/nav_exercise"
+            android:icon="@drawable/ic_exercise"
+            android:title="@string/menu_Exercises" />
+        <item
+            android:id="@+id/nav_my_profile"
+            android:icon="@drawable/ic_my_profile"
+            android:title="@string/menu_My_Profile" />
+        <item
+            android:id="@+id/nav_my_progress"
+            android:icon="@drawable/ic_progress"
+            android:title="@string/Menu_Progress" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/feedback"
+                android:icon="@drawable/ic_menu_share"
+                android:title="@string/menu_feedback" />
+
+        </menu>
+    </item>
+
+</menu>

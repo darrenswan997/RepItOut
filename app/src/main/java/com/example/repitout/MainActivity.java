@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
                                 etPassword.setText("");
 
                                 Toast.makeText(MainActivity.this, "Log in Successful", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(MainActivity.this, Nav.class));
+                                startActivity(new Intent(MainActivity.this, Exercises.class));
                                 finish();
                             }
 
@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, Register.class));
+
             }
         });
     }

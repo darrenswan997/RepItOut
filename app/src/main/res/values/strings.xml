@@ -17,6 +17,7 @@
     <string name="menu_My_Profile">My Profile</string>
     <string name="Menu_Progress">View Progress</string>
 
+
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
@@ -30,4 +31,8 @@
     <string name="logPassword">Password</string>
     <string name="confPassword">Confirm Password</string>
     <string name="btnUserReg">Register</string>
+    <string name="title_activity_nav_main">nav_main</string>
+    <string name="menu_feedback">Feedback</string>
+    <string name="Rep_It_Out">Rep It Out</string>
+
 </resources>
