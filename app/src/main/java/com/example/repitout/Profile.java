@@ -2,20 +2,19 @@ package com.example.repitout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
 
-import com.example.repitout.ui.profile.ProfileFragment;
-
-public class Profile extends AppCompatActivity {
+public class Profile extends nav_main_page {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.profile_activity);
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, ProfileFragment.newInstance())
-                    .commitNow();
-        }
+        LayoutInflater inflater = (LayoutInflater) this
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View contentView = inflater.inflate(R.layout.activity_profile, null, false);
+        dl.addView(contentView, 0);
     }
 }

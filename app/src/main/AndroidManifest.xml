@@ -11,20 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DetailActivity"></activity>
-        <activity android:name=".feedback" />
+        <activity android:name=".Profile"></activity>
         <activity android:name=".Progress" />
-        <activity android:name=".Profile" />
+        <activity android:name=".routines" />
+        <activity android:name=".DetailActivity" />
         <activity android:name=".Exercises" />
-        <activity android:name=".Routines" />
-        <activity
-            android:name=".nav_main"
-            android:label="@string/title_activity_nav_main"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Register"
-            android:label="@string/title_activity_register"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,7 +25,9 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+             />
+        <activity android:name=".nav_main_page"
+            android:label="@string/title_activity_nav_main"/>
     </application>
 
 </manifest>

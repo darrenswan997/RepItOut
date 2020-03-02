@@ -34,5 +34,11 @@
     <string name="title_activity_nav_main">nav_main</string>
     <string name="menu_feedback">Feedback</string>
     <string name="Rep_It_Out">Rep It Out</string>
+    <string name="test">test</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="hello">hello</string>
+    <string name="title">title</string>
+    <string name="link">link</string>
 
 </resources>

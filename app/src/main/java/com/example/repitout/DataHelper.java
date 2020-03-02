@@ -36,7 +36,7 @@ public class DataHelper {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 Workout workout = new Workout();
                 workout.setTitle(jsonObject.getString("title"));
-                workout.setLink(jsonObject.getString("Link"));
+                workout.setLink(jsonObject.getString("link"));
 
                 workouts.add(workout);
             }

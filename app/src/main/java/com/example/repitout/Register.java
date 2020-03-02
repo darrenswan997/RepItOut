@@ -115,7 +115,7 @@ public class Register extends AppCompatActivity {
                                 saveUserData();
                                 finish();
                             }
-                            startActivity(new Intent( Register.this,nav_main.class));
+                            startActivity(new Intent( Register.this,nav_main_page.class));
                         }
                     });
                 }
