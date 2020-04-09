@@ -40,13 +40,8 @@ public class Register extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show());
 
         nameUserReg = (EditText)findViewById(R.id.etNameUserReg);
         phoneUserReg = (EditText)findViewById(R.id.etPhoneUserReg);
@@ -58,69 +53,63 @@ public class Register extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Users");
 
         bttnUserReg = (Button)findViewById(R.id.btnUserReg);
-        bttnUserReg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                name_UserReg = nameUserReg.getText().toString();
-                phone_UserReg = phoneUserReg.getText().toString();
-                email_UserReg = emailUserReg.getText().toString();
-                pass_UserReg = passUserReg.getText().toString();
-                confPass_Reg = confPassReg.getText().toString();
+        bttnUserReg.setOnClickListener(v -> {
+            name_UserReg = nameUserReg.getText().toString();
+            phone_UserReg = phoneUserReg.getText().toString();
+            email_UserReg = emailUserReg.getText().toString();
+            pass_UserReg = passUserReg.getText().toString();
+            confPass_Reg = confPassReg.getText().toString();
 
-                if (name_UserReg.isEmpty()){
-                    nameUserReg.setError("Enter Name");
-                    nameUserReg.requestFocus();
-                }
-
-                else if(phone_UserReg.isEmpty()){
-                    phoneUserReg.setError("Enter Phone");
-                    passUserReg.requestFocus();
-                }
-
-                else if (email_UserReg.isEmpty()){
-                    emailUserReg.setError("Enter Email Address");
-                    emailUserReg.requestFocus();
-                }
-
-                else if(!Patterns.EMAIL_ADDRESS.matcher(email_UserReg).matches()){
-                    Toast.makeText(Register.this, "Please enter a valid email address", Toast.LENGTH_SHORT).show();
-                    emailUserReg.setError("Enter a valid Email Address");
-                    emailUserReg.requestFocus();
-                }
-
-                else if(pass_UserReg.isEmpty()){
-                    passUserReg.setError("Enter password");
-                    passUserReg.requestFocus();
-                }
-
-                else if(confPass_Reg.isEmpty()){
-                    confPassReg.setError("Enter your address");
-                    confPassReg.requestFocus();
-                }
-
-                else if (!pass_UserReg.equals(confPass_Reg)) {
-                    Toast.makeText(Register.this, "Confirm Password does not match Password", Toast.LENGTH_SHORT).show();
-                    confPassReg.setError("Enter same Password");
-                    confPassReg.requestFocus();
-                }
-
-                else{
-                    String new_emailReg = emailUserReg.getText().toString().trim();
-                    String new_passReg = passUserReg.getText().toString().trim();
-
-                    firebaseAuth.createUserWithEmailAndPassword(new_emailReg,new_passReg).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()){
-                                saveUserData();
-                                finish();
-                            }
-                            startActivity(new Intent( Register.this,nav_main_page.class));
-                        }
-                    });
-                }
-
+            if (name_UserReg.isEmpty()){
+                nameUserReg.setError("Enter Name");
+                nameUserReg.requestFocus();
             }
+
+            else if(phone_UserReg.isEmpty()){
+                phoneUserReg.setError("Enter Phone");
+                passUserReg.requestFocus();
+            }
+
+            else if (email_UserReg.isEmpty()){
+                emailUserReg.setError("Enter Email Address");
+                emailUserReg.requestFocus();
+            }
+
+            else if(!Patterns.EMAIL_ADDRESS.matcher(email_UserReg).matches()){
+                Toast.makeText(Register.this, "Please enter a valid email address", Toast.LENGTH_SHORT).show();
+                emailUserReg.setError("Enter a valid Email Address");
+                emailUserReg.requestFocus();
+            }
+
+            else if(pass_UserReg.isEmpty()){
+                passUserReg.setError("Enter password");
+                passUserReg.requestFocus();
+            }
+
+            else if(confPass_Reg.isEmpty()){
+                confPassReg.setError("Enter your address");
+                confPassReg.requestFocus();
+            }
+
+            else if (!pass_UserReg.equals(confPass_Reg)) {
+                Toast.makeText(Register.this, "Confirm Password does not match Password", Toast.LENGTH_SHORT).show();
+                confPassReg.setError("Enter same Password");
+                confPassReg.requestFocus();
+            }
+
+            else{
+                String new_emailReg = emailUserReg.getText().toString().trim();
+                String new_passReg = passUserReg.getText().toString().trim();
+
+                firebaseAuth.createUserWithEmailAndPassword(new_emailReg,new_passReg).addOnCompleteListener(task -> {
+                    if (task.isSuccessful()){
+                        saveUserData();
+                        finish();
+                    }
+                    startActivity(new Intent( Register.this,nav_main_page.class));
+                });
+            }
+
         });
 
 

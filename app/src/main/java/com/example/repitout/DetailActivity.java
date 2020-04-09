@@ -14,6 +14,9 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
+        title = findViewById(R.id.title_tv);
+        link = findViewById(R.id.link_tv);
+
         Bundle extra = getIntent().getExtras();
         if (extra != null){
             String t = extra.getString("EXTRA_TITLE");
@@ -23,8 +26,7 @@ public class DetailActivity extends AppCompatActivity {
             link.setText(l);
         }
 
-        title = findViewById(R.id.title_tv);
-        link = findViewById(R.id.link_tv);
+
 
 
     }

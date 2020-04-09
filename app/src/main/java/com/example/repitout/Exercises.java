@@ -17,7 +17,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class Exercises extends nav_main_page {
+public class Exercises extends nav_main_page implements AdapterView.OnItemClickListener {
 
 
     private ListView execerise_lv;
@@ -44,21 +44,18 @@ public class Exercises extends nav_main_page {
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, titleList);
         execerise_lv.setAdapter((ListAdapter) adapter);
-        execerise_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        execerise_lv.setOnItemClickListener(this);
+    }
 
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
+        Intent intent = new Intent(Exercises.this,DetailActivity.class);
+        String title = wList.get(pos).getTitle();
+        String link = wList.get(pos).getLink();
 
-                Intent intent = new Intent(Exercises.this, DetailActivity.class);
-                String title = wList.get(position).getTitle();
-                String link = wList.get(position).getLink();
+        intent.putExtra("EXTRA_TITLE",title);
+        intent.putExtra("EXTRA_LINK",link);
 
-                intent.putExtra("EXTRA_TITLE", title);
-                intent.putExtra("EXTRA_LINK", link);
-
-                startActivity(intent);
-
-            }
-        });
+        startActivity(intent);
     }
 }

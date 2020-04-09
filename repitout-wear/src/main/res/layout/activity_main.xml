@@ -5,28 +5,60 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dark_grey"
-    android:padding="@dimen/box_inset_layout_padding"
+    android:padding="5dp"
     tools:context=".MainActivity"
     tools:deviceIds="wear">
 
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="@dimen/inner_frame_layout_padding"
-        app:boxedEdges="all">
+        >
 
         <TextView
             android:id="@+id/text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Welcome_repItOut" />
+            android:text="@string/Welcome_repItOut"
+            android:layout_centerHorizontal="true"/>
 
+        <!--<ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@id/sign_in_button">
+            <com.google.android.gms.fit.samples.common.logger.LogView
+                android:id="@+id/sample_logview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical" />
+        </ScrollView>-->
+
+<!--
         <com.google.android.gms.common.SignInButton
             android:id="@+id/sign_in_button"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+-->
+
+        <Button
+            android:id="@+id/rep_counter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/count_reps"
+            android:visibility="visible"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/text"
+            />
+
+        <Button
+            android:id="@+id/sign_out_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/wear_signout_button_text"
+            android:visibility="gone" />
 
 
 
-    </FrameLayout>
+    </RelativeLayout>
 </androidx.wear.widget.BoxInsetLayout>

@@ -76,13 +76,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Btnregister = (Button)findViewById(R.id.registerBtn);
-        Btnregister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, Register.class));
-
-            }
-        });
+        Btnregister = findViewById(R.id.registerBtn);
+        Btnregister.setOnClickListener(v -> startActivity(new Intent(MainActivity.this,Register.class)));
     }
 }
