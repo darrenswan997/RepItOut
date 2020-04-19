@@ -43,7 +43,7 @@ public class Exercises_for_routines extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Exercises_for_routines.this,routines.class);
+                Intent intent = new Intent(Exercises_for_routines.this,CreateRoutines.class);
                 intent.putExtra("exercises",exercises);
                 startActivity(intent);
             }

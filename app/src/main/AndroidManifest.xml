@@ -15,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Exercises_for_routines"></activity>
+        <activity android:name=".CreateRoutines"></activity>
+        <activity android:name=".Exercises_for_routines" />
         <activity android:name=".User_details" />
         <activity android:name=".Profile" />
         <activity android:name=".Progress" />
