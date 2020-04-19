@@ -20,10 +20,10 @@ import java.util.ArrayList;
 public class Exercises extends nav_main_page implements AdapterView.OnItemClickListener {
 
 
-    private ListView execerise_lv;
-    private ArrayList<Workout> wList;
-    private ArrayList<String> titleList;
-    private Adapter adapter;
+    public ListView execerise_lv;
+    public ArrayList<Workout> wList;
+    public ArrayList<String> titleList;
+    public Adapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

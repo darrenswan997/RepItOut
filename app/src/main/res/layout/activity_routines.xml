@@ -4,7 +4,120 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/darkGrey"
+    android:orientation="vertical"
     tools:context=".routines">
+
+
+    <TextView
+        android:id="@+id/newRoutineTV"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:padding="16dp"
+        android:text="@string/create_new_routine"
+        android:textAlignment="center"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#ffffff" />
+
+    <TextView
+        android:id="@+id/newRoutineTV2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/newRoutineTV"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:hint="@string/routine_name"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#ffffff" />
+
+    <EditText
+        android:id="@+id/routineNameET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/newRoutineTV2"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:background="@drawable/shape_wihte_frame"
+        android:inputType="textPersonName"
+        android:text="@string/routine_name"
+        android:textColor="#ffffff" />
+
+    <TextView
+        android:id="@+id/dateTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/routineNameET"
+        android:layout_alignStart="@+id/newRoutineTV2"
+        android:layout_marginTop="22dp"
+        android:text="@string/date"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#ffffff" />
+
+    <TextView
+        android:id="@+id/dateTV2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dateTV"
+        android:layout_alignStart="@+id/newRoutineTV2"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:background="@drawable/shape_wihte_frame"
+        android:hint="@string/dd_mm_yyyy"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#ffffff" />
+
+    <Button
+        android:id="@+id/buttonNewRoutine1"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_alignTop="@+id/dateTV2"
+        android:layout_alignEnd="@id/routineNameET"
+        android:layout_marginEnd="8dp"
+        android:background="@mipmap/calendar" />
+
+    <TextView
+        android:id="@+id/addExercises"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonNewRoutine1"
+        android:layout_alignStart="@+id/routineNameET"
+        android:layout_marginTop="25dp"
+        android:text="@string/add_exercises"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#ffffff" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/plus"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:layout_toEndOf="@+id/addExercises"
+        android:id="@+id/addExercisesBtn"
+        android:background="@android:color/transparent"
+        android:layout_alignBaseline="@+id/addExercises"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        />
+
+    <TextView
+        android:id="@+id/excersizesTV"
+        android:textColor="#ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/addExercises"
+        android:layout_alignStart="@+id/routineNameET"
+        android:layout_alignEnd="@id/routineNameET"
+        android:dividerHeight="2dp"
+            />
+
+    <Button
+        android:id="@+id/saveRoutine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorPrimary"
+        android:text="@string/save"
+        android:textColor="#ffffff" />
 
 
 </RelativeLayout>

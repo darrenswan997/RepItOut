@@ -4,14 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
+    android:background="@drawable/background_color"
     tools:layout_editor_absoluteX="0dp"
-    tools:layout_editor_absoluteY="0dp">
+    tools:layout_editor_absoluteY="0dp"
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="30dp">
+        android:paddingBottom="30dp"
+        android:background="@drawable/background_color">
 
         <TextView
             android:id="@+id/Details"
@@ -19,7 +21,7 @@
             android:layout_height="30dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="200dp"
+            android:layout_marginTop="150dp"
             android:text="@string/Details"
             android:textAlignment="center"
             android:textColor="@android:color/black"
@@ -91,7 +93,7 @@
 
         <Button
             android:id="@+id/btnUserReg"
-            android:layout_width="160dp"
+            android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_below="@id/etConfPassUserReg"
             android:layout_centerHorizontal="true"

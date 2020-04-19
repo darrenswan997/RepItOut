@@ -1,35 +1,50 @@
 package com.example.repitout;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
-import android.Manifest;
-import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.Context;
+
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CalendarView;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.fitness.Fitness;
-import com.google.android.gms.fitness.FitnessOptions;
-import com.google.android.gms.fitness.data.DataType;
-import com.google.android.gms.fitness.request.DataReadRequest;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
+import java.util.Map;
+
+import javax.security.auth.login.LoginException;
+
 
 public class routines extends nav_main_page {
 
-    private static final int MY_PERMISSIONS_REQUEST_ACTIVITY_RECOGNITION = 1;
-    private static final int GOOGLE_FIT_PERMISSIONS_REQUEST_CODE = 1;
-    private static final String TAG = "";
+    EditText newRoutineName, date;
+
+    int startYear, startMonth,startDay;
+    TextView selectedDate, exercizes_TV;
+    String routine, year, month, day, exercise_List;
+    Button saveDetails, addExercises;
+    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Workout");
+    ArrayList<String> exercises ;
+    DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("routines");
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,85 +54,102 @@ public class routines extends nav_main_page {
         View contentView = inflater.inflate(R.layout.activity_routines, null, false);
         dl.addView(contentView, 0);
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACTIVITY_RECOGNITION)
-                != PackageManager.PERMISSION_GRANTED) {
-            // Permission is not granted
-        }
+        selectedDate = findViewById(R.id.dateTV2);
+        saveDetails = findViewById(R.id.saveRoutine);
+        newRoutineName = findViewById(R.id.routineNameET);
+        exercizes_TV = findViewById(R.id.excersizesTV);
+        addExercises = findViewById(R.id.addExercisesBtn);
 
-        ActivityCompat.requestPermissions(this,
-                new String[]{(Manifest.permission.ACTIVITY_RECOGNITION)},
-                MY_PERMISSIONS_REQUEST_ACTIVITY_RECOGNITION);
-
-
-        FitnessOptions fitnessOptions = FitnessOptions.builder()
-                .addDataType(DataType.TYPE_WORKOUT_EXERCISE, FitnessOptions.ACCESS_WRITE)
-                .addDataType(DataType.TYPE_WORKOUT_EXERCISE, FitnessOptions.ACCESS_READ)
-                .addDataType(DataType.TYPE_STEP_COUNT_DELTA, FitnessOptions.ACCESS_READ)
-                .addDataType(DataType.TYPE_STEP_COUNT_DELTA, FitnessOptions.ACCESS_WRITE)
-                .build();
-
-        GoogleSignInAccount account = GoogleSignIn.getAccountForExtension(this, fitnessOptions);
-
-        if (!GoogleSignIn.hasPermissions(account, fitnessOptions)) {
-            GoogleSignIn.requestPermissions(
-                    this, // your activity
-                    GOOGLE_FIT_PERMISSIONS_REQUEST_CODE, // e.g. 1
-                    account,
-                    fitnessOptions);
-        } else {
-            accessGoogleFit();
-        }
-
-
-
-
-    }
-
-
-    private void accessGoogleFit() {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(new Date());
-        long endTime = cal.getTimeInMillis();
-        cal.add(Calendar.YEAR, -1);
-        long startTime = cal.getTimeInMillis();
-
-        DataReadRequest readRequest = new DataReadRequest.Builder()
-                .aggregate(DataType.TYPE_STEP_COUNT_DELTA, DataType.AGGREGATE_STEP_COUNT_DELTA)
-                .setTimeRange(startTime, endTime, TimeUnit.MILLISECONDS)
-                .bucketByTime(1, TimeUnit.DAYS)
-                .build();
-
-
-        FitnessOptions fitnessOptions = FitnessOptions.builder()
-                .addDataType(DataType.TYPE_WORKOUT_EXERCISE, FitnessOptions.ACCESS_WRITE)
-                .addDataType(DataType.TYPE_WORKOUT_EXERCISE, FitnessOptions.ACCESS_READ)
-                .addDataType(DataType.TYPE_STEP_COUNT_DELTA, FitnessOptions.ACCESS_READ)
-                .addDataType(DataType.TYPE_STEP_COUNT_DELTA, FitnessOptions.ACCESS_WRITE)
-                .build();
-
-            GoogleSignInAccount account = GoogleSignIn
-                    .getAccountForExtension(this, fitnessOptions);
-
-        Fitness.getHistoryClient(this, account)
-                .readData(readRequest)
-                .addOnSuccessListener(response -> {
-                    // Use response data here
-
-                    Log.d(TAG, "OnSuccess()");
-                })
-                .addOnFailureListener(e -> {
-                    Log.d(TAG, "OnFailure()", e);
-                });
-    }
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == GOOGLE_FIT_PERMISSIONS_REQUEST_CODE) {
-                accessGoogleFit();
+        addExercises.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(routines.this, Exercises_for_routines.class));
             }
+        });
+
+        Intent intent = getIntent();
+
+               exercises= intent.getStringArrayListExtra("exercises");
+
+        StringBuilder builder = new StringBuilder();
+        if (exercises == null) {
+            System.out.println("empty");
+        }else if(exercises.size() >=1){
+            for (String s : exercises) {
+                builder.append(s).append("\n");
+                exercizes_TV.setText(builder.toString());
+            }
+        }
+
+
+
+
+        Calendar MyCalendar1 = Calendar.getInstance();
+
+        DatePickerDialog.OnDateSetListener MyOnDateSetListener1 = new DatePickerDialog.OnDateSetListener(){
+            public void onDateSet(DatePicker view, int year, int month, int day) {
+                startYear = year;
+                startMonth = month;
+                startDay = day;
+
+                selectedDate.setText("" + day  + "/" + (month + 1) + "/" + year);
+            }
+        };
+
+        selectedDate.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        new DatePickerDialog(routines.this, MyOnDateSetListener1,
+                                MyCalendar1.get(Calendar.YEAR),
+                                MyCalendar1.get(Calendar.MONTH),
+                                MyCalendar1.get(Calendar.DAY_OF_MONTH)
+                        ).show();
+
+                    }
+                }
+
+        );
+
+
+        saveDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                routine = newRoutineName.getText().toString();
+                day = String.valueOf(startDay);
+                month = String.valueOf(startMonth+1);
+                year = String.valueOf(startYear);
+                //exercise_List = exercises.toString();
+
+                if (routine.isEmpty()){
+                    newRoutineName.setError("Enter routine name");
+                    newRoutineName.requestFocus();
+                }
+                saveExercises();
+                saveRoutine();
+                startActivity(new Intent(routines.this, Profile.class));
+            }
+        });
+
+    }
+
+    private void saveRoutine() {
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+        String userID = firebaseUser.getUid();
+        routines_helper routines = new routines_helper(routine, day, month, year);
+        db = databaseReference.child(userID).child("routines");
+        db.setValue(routines);
+        Toast.makeText(this, "Your routine has been recorded", Toast.LENGTH_LONG).show();
+
+    }
+
+    private void saveExercises(){
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+        String userID = firebaseUser.getUid();
+        //DatabaseReference ref = databaseReference.child(userID).child("routines");
+        db = databaseReference.child(userID).child("exercises");
+        for (String exercise : exercises){
+            db.push().setValue(exercise);
         }
     }
 

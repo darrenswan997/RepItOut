@@ -29,50 +29,44 @@ public class MainActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-        etEmail = (EditText) findViewById(R.id.logEmail);
-        etPassword = (EditText)findViewById(R.id.logPassword);
+        etEmail = findViewById(R.id.logEmail);
+        etPassword = findViewById(R.id.logPassword);
 
-        loginBtn = (Button)findViewById(R.id.logBtn);
-        loginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                et_email=etEmail.getText().toString();
-                et_password=etPassword.getText().toString();
+        loginBtn = findViewById(R.id.logBtn);
+        loginBtn.setOnClickListener(v -> {
+            et_email=etEmail.getText().toString();
+            et_password=etPassword.getText().toString();
 
-                if (et_email.isEmpty()){ //if email et is blank
-                    etEmail.setError("Enter your Login Email"); //sends error message
-                    etEmail.requestFocus(); //keypad starts on this line
-                }
+            if (et_email.isEmpty()){ //if email et is blank
+                etEmail.setError("Enter your Login Email"); //sends error message
+                etEmail.requestFocus(); //keypad starts on this line
+            }
 
-                else if (!Patterns.EMAIL_ADDRESS.matcher(et_email).matches()){
-                    Toast.makeText(MainActivity.this, "Please enter a valid email address", Toast.LENGTH_SHORT).show();
-                    etEmail.setError("Enter your Login Email"); //sends error message
-                    etEmail.requestFocus(); //keypad starts on this line
-                }
-                else if (et_password.isEmpty()){ //if email et is blank
-                    etPassword.setError("Enter your Password"); //sends error message
-                    etPassword.requestFocus(); //keypad starts on this line
-                }
-                else{
-                    firebaseAuth.signInWithEmailAndPassword(et_email,et_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()){
-                                etEmail.setText("");
-                                etPassword.setText("");
+            else if (!Patterns.EMAIL_ADDRESS.matcher(et_email).matches()){
+                Toast.makeText(MainActivity.this, "Please enter a valid email address", Toast.LENGTH_SHORT).show();
+                etEmail.setError("Enter your Login Email"); //sends error message
+                etEmail.requestFocus(); //keypad starts on this line
+            }
+            else if (et_password.isEmpty()){ //if email et is blank
+                etPassword.setError("Enter your Password"); //sends error message
+                etPassword.requestFocus(); //keypad starts on this line
+            }
+            else{
+                firebaseAuth.signInWithEmailAndPassword(et_email,et_password).addOnCompleteListener(task -> {
+                    if (task.isSuccessful()){
+                        etEmail.setText("");
+                        etPassword.setText("");
 
-                                Toast.makeText(MainActivity.this, "Log in Successful", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(MainActivity.this,Progress.class));
-                                finish();
-                            }
+                        Toast.makeText(MainActivity.this, "Log in Successful", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(MainActivity.this,Exercises.class));
+                        finish();
+                    }
 
-                            else{
-                                Toast.makeText(MainActivity.this, "Log in failed, you entered a wrong Email or Password", Toast.LENGTH_SHORT).show();
-                            }
+                    else{
+                        Toast.makeText(MainActivity.this, "Log in failed, you entered a wrong Email or Password", Toast.LENGTH_SHORT).show();
+                    }
 
-                        }
-                    });
-                }
+                });
             }
         });
 

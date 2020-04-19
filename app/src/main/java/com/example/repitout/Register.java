@@ -36,23 +36,19 @@ public class Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show());
 
-        nameUserReg = (EditText)findViewById(R.id.etNameUserReg);
-        phoneUserReg = (EditText)findViewById(R.id.etPhoneUserReg);
-        emailUserReg = (EditText)findViewById(R.id.etEmailUserReg);
-        passUserReg = (EditText)findViewById(R.id.etPassUserReg);
-        confPassReg = (EditText)findViewById(R.id.etConfPassUserReg);
+
+        nameUserReg = findViewById(R.id.etNameUserReg);
+        phoneUserReg = findViewById(R.id.etPhoneUserReg);
+        emailUserReg = findViewById(R.id.etEmailUserReg);
+        passUserReg = findViewById(R.id.etPassUserReg);
+        confPassReg = findViewById(R.id.etConfPassUserReg);
 
         firebaseAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Users");
 
-        bttnUserReg = (Button)findViewById(R.id.btnUserReg);
+        bttnUserReg = findViewById(R.id.btnUserReg);
         bttnUserReg.setOnClickListener(v -> {
             name_UserReg = nameUserReg.getText().toString();
             phone_UserReg = phoneUserReg.getText().toString();
@@ -106,7 +102,7 @@ public class Register extends AppCompatActivity {
                         saveUserData();
                         finish();
                     }
-                    startActivity(new Intent( Register.this,nav_main_page.class));
+                    startActivity(new Intent( Register.this,User_details.class));
                 });
             }
 
@@ -122,6 +118,7 @@ public class Register extends AppCompatActivity {
         com.example.repitout.User userReg = new com.example.repitout.User(name_UserReg, phone_UserReg, email_UserReg);
         databaseReference.child(userID).setValue(userReg);
         Toast.makeText(this, "User registered successfully", Toast.LENGTH_LONG).show();
+
     }
 }
 

@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
 
     <application
         android:allowBackup="true"
@@ -14,6 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Exercises_for_routines"></activity>
+        <activity android:name=".User_details" />
         <activity android:name=".Profile" />
         <activity android:name=".Progress" />
         <activity android:name=".routines" />
@@ -30,6 +33,7 @@
         <activity
             android:name=".nav_main_page"
             android:label="@string/title_activity_nav_main" />
+        <activity android:name=".Register" />
     </application>
 
 </manifest>

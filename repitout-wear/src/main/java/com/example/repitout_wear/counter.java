@@ -123,7 +123,7 @@ public class counter extends WearableActivity implements SensorEventListener {
             }
             if (mCounter > 20){
                 resetCounter();
-                mCounter++;
+
             }
         }
     }
@@ -141,7 +141,7 @@ public class counter extends WearableActivity implements SensorEventListener {
 
     public void resetCounter(){
         setCounter(0);
-        mCounter++;
+
     }
 
 

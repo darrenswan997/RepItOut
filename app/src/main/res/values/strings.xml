@@ -40,5 +40,25 @@
     <string name="hello">hello</string>
     <string name="title">title</string>
     <string name="link">link</string>
+    <string name="profile">Profile</string>
+    <string name="tell_us_more_about_yourself">Tell us more about yourself</string>
+    <string name="age">Age</string>
+    <string name="weight">weight</string>
+    <string name="save">save</string>
+    <string name="current_age">Current Age</string>
+    <string name="height">Height</string>
+    <string name="current_weight">Current Weight</string>
+    <string name="update_stats">Update stats</string>
+    <string name="enter_your_latest_figures">Enter your latest figures</string>
+    <string name="confirm">confirm</string>
+    <string name="select_date">Select date</string>
+    <string name="add_workout">Add Workout</string>
+    <string name="routine_name">Routine Name</string>
+    <string name="date">Date</string>
+    <string name="create_new_routine">Create New Routine</string>
+    <string name="dd_mm_yyyy">dd/mm/yyyy</string>
+    <string name="add_exercises">Add Exercises</string>
+    <string name="next">Next</string>
+    <string name="plus">+</string>
 
 </resources>
