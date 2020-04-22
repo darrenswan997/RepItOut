@@ -1,50 +1,45 @@
 package com.example.repitout;
 
 
-import android.app.DatePickerDialog;
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CalendarView;
-import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Map;
-
-import javax.security.auth.login.LoginException;
+import java.util.List;
 
 
 public class routines extends nav_main_page {
 
-    EditText newRoutineName, date;
 
-    int startYear, startMonth,startDay;
-    TextView selectedDate, exercizes_TV;
-    String routine, year, month, day, exercise_List;
     Button createRoutine;
+    RecyclerView rv;
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Workout");
-    ArrayList<String> exercises ;
-    DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("routines");
+    FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+    String userID = firebaseUser.getUid();
+    DatabaseReference dbWorkout;
+    DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("workout");
+    DatabaseReference dbr = db.child(userID);
 
+    ProductAdapter adapter;
+    List<routines_helper> routinesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,17 +49,47 @@ public class routines extends nav_main_page {
         View contentView = inflater.inflate(R.layout.activity_routines, null, false);
         dl.addView(contentView, 0);
 
+        rv = findViewById(R.id.recycler);
+        rv.setHasFixedSize(true);
+        rv.setLayoutManager(new LinearLayoutManager(this));
+        routinesList = new ArrayList<>();
+        adapter=new ProductAdapter(this, routinesList);
+        rv.setAdapter(adapter);
 
         createRoutine = findViewById(R.id.createRoutine);
+        createRoutine.setOnClickListener(v -> startActivity(new Intent(routines.this, CreateRoutines.class)));
 
-        createRoutine.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(routines.this, CreateRoutines.class));
-            }
-        });
+        dbWorkout = FirebaseDatabase.getInstance().getReference("Workout");
 
+        //dbWorkout.addListenerForSingleValueEvent(valueEventListener);
+
+        Query query = FirebaseDatabase.getInstance().getReference("Workout")
+                .child(userID)
+                .child("Routines")
+                .orderByChild("name");
+
+       query.addListenerForSingleValueEvent(valueEventListener);
 
     }
+
+    ValueEventListener valueEventListener = new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            routinesList.clear();
+            if (dataSnapshot.exists()){
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    routines_helper helper = snapshot.getValue(routines_helper.class);
+                    routinesList.add(helper);
+
+                }
+                adapter.notifyDataSetChanged();
+            }
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+        }
+    };
 
 }

@@ -19,18 +19,23 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CreateRoutines extends AppCompatActivity {
     EditText newRoutineName, date;
 
     int startYear, startMonth,startDay;
     TextView selectedDate, exercizes_TV;
-    String routine, year, month, day, exercise_List;
+    String routine, eName;
+    String year, month, day;
     Button saveDetails, addExercises;
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Workout");
     ArrayList<String> exercises ;
     DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("routines");
+    Map<String,String> exerciseMap;
+    public ArrayList<String> exc ;
 
 
     @Override
@@ -43,6 +48,8 @@ public class CreateRoutines extends AppCompatActivity {
         newRoutineName = findViewById(R.id.routineNameET);
         exercizes_TV = findViewById(R.id.excersizesTV);
         addExercises = findViewById(R.id.addExercisesBtn);
+
+        exerciseMap = new HashMap<>();
 
         addExercises.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,8 +69,11 @@ public class CreateRoutines extends AppCompatActivity {
             for (String s : exercises) {
                 builder.append(s).append("\n");
                 exercizes_TV.setText(builder.toString());
+
             }
         }
+
+
 
 
 
@@ -105,6 +115,9 @@ public class CreateRoutines extends AppCompatActivity {
                 year = String.valueOf(startYear);
                 //exercise_List = exercises.toString();
 
+
+                //map<>.put("exercise",name)
+
                 if (routine.isEmpty()){
                     newRoutineName.setError("Enter routine name");
                     newRoutineName.requestFocus();
@@ -121,11 +134,23 @@ public class CreateRoutines extends AppCompatActivity {
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         String userID = firebaseUser.getUid();
         routines_helper routines = new routines_helper(routine, day, month, year);
-        db = databaseReference.child(userID).child(routine);
+        db = databaseReference.child(userID).child("Routines").child(routine);
+        DatabaseReference dbr = db.child("Exercises");
+
         db.setValue(routines);
-        for (String exercise : exercises){
-            db.push().setValue(exercise);
+        for (String s : exercises){
+            eName = s;
+             exc = new ArrayList<String>();
+             exc.add(eName);
+            exerciseMap.put("Exercises",eName);
+            //Exercises_helper helper = new Exercises_helper(eName, exerciseMap);
+            dbr.child(eName).setValue(exerciseMap);
+            //dbr.child(eName).setValue(exerciseMap); db"routtine name"
         }
+
+
+
+
         Toast.makeText(this, "Your routine has been recorded", Toast.LENGTH_LONG).show();
 
     }

@@ -6,8 +6,20 @@ import java.util.Map;
 public class routines_helper {
 
     private Map<String, String> date;
-    private String name, day, month, year;
+    public String name;
+    public String day;
+    public String month;
+    public String year;
+
+    public routines_helper(String dbExercise) {
+        this.dbExercise = dbExercise;
+    }
+
+    private String dbExercise;
     private ArrayList<String> excList;
+
+    public routines_helper() {
+    }
 
     public routines_helper(String name, String day, String month, String year) {
         this.name = name;
@@ -17,7 +29,13 @@ public class routines_helper {
 
     }
 
+    public String getDbExercise() {
+        return dbExercise;
+    }
 
+    public void setDbExercise(String dbExercise) {
+        this.dbExercise = dbExercise;
+    }
 
     public String getDay() {
         return day;

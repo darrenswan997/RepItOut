@@ -60,5 +60,14 @@
     <string name="add_exercises">Add Exercises</string>
     <string name="next">Next</string>
     <string name="plus">+</string>
+    <string name="view_routines">View Routines</string>
+    <string name="routine">Routine</string>
+    <string name="date_created">Date Created :</string>
+    <string name="exercise">Exercise :</string>
+    <string name="set">set :</string>
+    <string name="reps">Reps :</string>
+    <string name="count_reps">Count Reps</string>
+    <string name="your_routines">Your Routines</string>
+
 
 </resources>

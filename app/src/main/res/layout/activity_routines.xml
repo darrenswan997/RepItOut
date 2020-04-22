@@ -4,9 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/darkGrey"
+    android:background="@color/lightGrey"
     android:orientation="vertical"
     tools:context=".routines">
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ViewRoutines"
+        android:text="@string/your_routines"
+        android:layout_marginTop="5dp"
+        android:padding="16dp"
+        android:textAlignment="center"
+        android:textColor="#ffffff"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:id="@+id/recycler"
+        android:layout_below="@+id/ViewRoutines"
+        android:scrollbars="vertical"
+        android:layout_marginTop="10dp"
+        android:background="#ffffff"
+        android:layout_alignParentBottom="true"
+        >
+
+    </androidx.recyclerview.widget.RecyclerView>
+
 
 
 
@@ -19,6 +47,7 @@
         android:background="@color/colorPrimary"
         android:text="@string/create_new_routine"
         android:textColor="#ffffff" />
+
 
 
 
