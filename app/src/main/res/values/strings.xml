@@ -68,6 +68,10 @@
     <string name="reps">Reps :</string>
     <string name="count_reps">Count Reps</string>
     <string name="your_routines">Your Routines</string>
+    <string name="waiting_for_reps">waiting for reps...</string>
+    <string name="counted">Reps counted</string>
+    <string name="record_your_reps">Record your reps</string>
+    
 
 
 </resources>

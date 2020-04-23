@@ -8,9 +8,15 @@
     <string name="Welcome_repItOut">Welcome to Rep It Out</string>
     <string name="wear_signout_button_text">Sign Out</string>
     <string name="reset_counter">reset counter</string>
-    <string name="_0">0</string>
     <string name="title_activity_counter">counter</string>
     <string name="reps">Reps</string>
     <string name="count_reps">count reps</string>
     <string name="reset_reps">Reset Reps</string>
+    <string name="save_reps">save reps</string>
+    <string name="title_activity_recorded_reps">RecordedReps</string>
+    <string name="your_recorded_sets_and_reps">Your Recorded sets and reps</string>
+    <string name="sets">sets</string>
+    <string name="save">save</string>
+    <string name="_0">0</string>
+    <string name="view_work">view work</string>
 </resources>

@@ -1,6 +1,7 @@
-package com.example.repitout_wear;
+package com.example.repitout;
 
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -12,6 +13,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class counter extends WearableActivity implements SensorEventListener {
@@ -27,7 +32,9 @@ public class counter extends WearableActivity implements SensorEventListener {
     private boolean mHandDown = true;
     private int mCounter = 0;
     TextView reps_tv, counter_tv;
-    Button reset_btn;
+    Button reset_btn, saveRepsBtn, sets;
+
+    public ArrayList<String> savedReps = new ArrayList<>();
 
 
     // An up-down movement that takes more than 2 seconds will not be registered (in nanoseconds).
@@ -43,6 +50,21 @@ public class counter extends WearableActivity implements SensorEventListener {
         reps_tv = findViewById(R.id.repTv);
         counter_tv = findViewById(R.id.counterTv);
         mTextView =  findViewById(R.id.text);
+        saveRepsBtn = findViewById(R.id.save_reps);
+        sets = findViewById(R.id.view_sets_btn);
+        sets.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(counter.this, RecordedReps.class));
+            }
+        });
+        saveRepsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveReps(mCounter);
+
+            }
+        });
         mSensorManager =(SensorManager) getSystemService(Context.SENSOR_SERVICE);
         accel = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         mSensorManager.registerListener(this,accel,SensorManager.SENSOR_DELAY_NORMAL);
@@ -116,22 +138,22 @@ public class counter extends WearableActivity implements SensorEventListener {
         if (mHandDown != handDown) {
             mHandDown = handDown;
 
-            // Only count when the hand is down (means the hand has gone up, then down).
-            if (mHandDown) {
+
+            if(mHandDown && mCounter <=20) {
+
                 mCounter++;
                 setCounter(mCounter);
+            }else if(mCounter >=20){
+                    resetCounter();
+                    mCounter++;
+                    setCounter(mCounter);
+                }
             }
-            if (mCounter > 20){
-                resetCounter();
 
-            }
         }
-    }
 
-    /**
-     * Updates the counter on UI, saves it to preferences and vibrates the watch when counter
-     * reaches a multiple of 10.
-     */
+
+
     private void setCounter(int i) {
         counter_tv.setText(String.valueOf(i));
         if (i > 0 && i % 10 == 0) {
@@ -140,9 +162,15 @@ public class counter extends WearableActivity implements SensorEventListener {
     }
 
     public void resetCounter(){
-        setCounter(0);
-
+        mCounter = 0;
+        counter_tv.setText(String.valueOf(mCounter));
     }
 
+    public void saveReps(int i){
+        savedReps.add(String.valueOf(i));
+        Intent intent = new Intent(counter.this, RecordedReps.class);
+        intent.putStringArrayListExtra("sets", savedReps);
+
+    }
 
 }

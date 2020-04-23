@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.wear.widget.BoxInsetLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:padding="@dimen/box_inset_layout_padding"
+    tools:context="com.example.repitout.RecordedReps"
+    tools:deviceIds="wear">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/inner_frame_layout_padding"
+        android:layout_margin="@dimen/inner_frame_layout_padding">
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/your_recorded_sets_and_reps"
+            android:textSize="20sp"
+            android:layout_centerHorizontal="true"
+            android:textAlignment="center"
+            android:layout_marginTop="25dp"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/setandrepsTV"
+            android:layout_below="@+id/text"
+            android:layout_marginTop="15dp"
+            android:textSize="20sp"
+            android:text="@string/sets"
+            android:textColor="@color/black"
+            android:layout_centerInParent="true"
+            android:textAlignment="center"/>
+
+        <Button
+            android:id="@+id/saveSetsReps"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@color/blue_a400"
+            android:text="@string/save"
+            android:layout_centerInParent="true"
+            android:textColor="#ffffff"/>
+
+
+
+
+
+    </RelativeLayout>
+</androidx.wear.widget.BoxInsetLayout>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.repitout_wear">
+    package="com.example.repitout">
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
@@ -14,7 +14,7 @@
         android:icon="@drawable/jump"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@android:style/Theme.DeviceDefault">
+        android:theme="@android:style/Theme.DeviceDefault.Light">
         <uses-library
             android:name="com.google.android.wearable"
             android:required="true" />
@@ -25,26 +25,24 @@
         -->
         <meta-data
             android:name="com.google.android.wearable.standalone"
-            android:value="true" />
+            android:value="false" />
 
         <activity
-            android:name=".counter"
+            android:name="com.example.repitout.RecordedReps"
+            android:label="@string/title_activity_recorded_reps"/>
+        <activity
+            android:name="com.example.repitout.counter"
             android:label="@string/title_activity_counter">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.repitout.MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

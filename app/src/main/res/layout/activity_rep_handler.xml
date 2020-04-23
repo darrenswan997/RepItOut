@@ -1,9 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RepHandler">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/messageTV"
+        android:text="@string/record_your_reps"
+        android:layout_centerHorizontal="true"
+        android:textSize="30sp"
+        android:layout_alignParentTop="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/SetsTextv"
+        android:text="@string/set"
+        android:layout_below="@+id/messageTV"
+        android:textSize="25sp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ETSets"
+        android:text="0"
+        android:textSize="30sp"
+        android:layout_toEndOf="@+id/SetsTextv"
+        android:layout_below="@+id/messageTV"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/RepsTextv"
+        android:text="@string/reps"
+        android:layout_below="@+id/SetsTextv"
+        android:textSize="25sp"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="20dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ETReps"
+        android:text="0"
+        android:textSize="30sp"
+        android:layout_toEndOf="@+id/RepsTextv"
+        android:layout_below="@+id/ETSets"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="22dp"/>
+
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/count_reps"
+        android:onClick="onStartWearableActivityClick"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/BTNdataCall"/>
+
+
+</RelativeLayout>

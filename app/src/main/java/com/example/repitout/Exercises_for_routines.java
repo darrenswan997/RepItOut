@@ -3,12 +3,14 @@ package com.example.repitout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -23,6 +25,7 @@ public class Exercises_for_routines extends AppCompatActivity {
     private FloatingActionButton fab;
     String exercise;
     ArrayList<String> exercises = new ArrayList<>();
+    boolean selected = false;
 
 
     @Override
@@ -49,16 +52,21 @@ public class Exercises_for_routines extends AppCompatActivity {
             }
         });
 
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, titleList);
-        execerise_lv.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,titleList));
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_activated_1, titleList);
+        execerise_lv.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_activated_1,titleList));
         execerise_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //String exercise = titleList.get(position);
                  exercise = (execerise_lv.getItemAtPosition(position)).toString();
-                 exercises.add(exercise);
-                 System.out.println(exercises);
+                 if (exercises.contains(exercise)){
+                     exercises.remove(exercise);
+                     view.setBackgroundColor(Color.WHITE);
 
+                 }else{
+                     exercises.add(exercise);
+                     view.setBackgroundColor(Color.GREEN);
+                 }
             }
         });
 

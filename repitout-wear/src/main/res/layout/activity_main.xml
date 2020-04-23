@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dark_grey"
+    android:background="@color/white"
     android:padding="5dp"
-    tools:context=".MainActivity"
+    tools:context="com.example.repitout.MainActivity"
     tools:deviceIds="wear">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/inner_frame_layout_padding"
+
         >
 
         <TextView
@@ -20,26 +20,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Welcome_repItOut"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"/>
 
-        <!--<ScrollView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_below="@id/sign_in_button">
-            <com.google.android.gms.fit.samples.common.logger.LogView
-                android:id="@+id/sample_logview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:scrollbars="vertical" />
-        </ScrollView>-->
 
-<!--
-        <com.google.android.gms.common.SignInButton
-            android:id="@+id/sign_in_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
--->
 
         <Button
             android:id="@+id/rep_counter"
@@ -49,14 +33,15 @@
             android:visibility="visible"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/text"
+            android:layout_marginTop="10dp"
             />
 
-        <Button
+        <!--<Button
             android:id="@+id/sign_out_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/wear_signout_button_text"
-            android:visibility="gone" />
+            android:layout_below="@+id/rep_counter" />-->
 
 
 

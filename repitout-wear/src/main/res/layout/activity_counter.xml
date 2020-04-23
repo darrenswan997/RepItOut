@@ -5,45 +5,69 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:padding="@dimen/box_inset_layout_padding"
-    tools:context=".counter"
+    tools:context="com.example.repitout.counter"
     tools:deviceIds="wear">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/inner_frame_layout_padding"
         >
 
         <TextView
             android:id="@+id/repTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/reps"
-            android:textSize="32sp"
-            android:textColor="@color/black"
-            android:layout_marginTop="50dp"
-            android:layout_centerHorizontal="true"/>
-
-        <TextView
-            android:id="@+id/counterTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0"
-            android:textSize="28sp"
-            android:textColor="@color/black"
-            android:layout_marginTop="20dp"
             android:layout_centerHorizontal="true"
-            android:layout_below="@id/repTv"/>
+            android:layout_marginTop="20dp"
+            android:text="@string/reps"
+            android:textColor="@color/black"
+            android:textSize="32sp" />
+
+
+            <TextView
+                android:id="@+id/counterTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_below="@+id/repTv"
+                android:layout_centerHorizontal="true"
+                android:text="0"
+                android:textColor="@color/black"
+                android:textSize="28sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/counterTv"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:id="@+id/LL"
+            >
 
         <Button
-            android:id="@+id/reset_btn"
+            android:id="@+id/save_reps"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/reset_reps"
-            android:layout_marginTop="10dp"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/counterTv"/>
+            android:text="@string/save_reps"
+            android:background="@drawable/round_button"/>
+
+            <Button
+                android:id="@+id/reset_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/reset_reps"
+                android:background="@drawable/round_button"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/view_sets_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/view_work"
+            android:background="@drawable/round_button"
+            android:layout_below="@id/LL"
+            android:layout_centerHorizontal="true"/>
+
 
     </RelativeLayout>
 </androidx.wear.widget.BoxInsetLayout>

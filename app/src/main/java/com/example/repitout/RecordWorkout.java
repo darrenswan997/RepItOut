@@ -32,19 +32,15 @@ import java.util.Objects;
 public class RecordWorkout extends AppCompatActivity {
 
     TextView routineName;
-    ListView listv;
-    Map<String,Object> map;
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
     String userID = firebaseUser.getUid();
-    ArrayList<String> arrayList;
-    //ArrayAdapter<String> adapter;
     String routName;
     RecyclerView rV;
     ExcercisesAdapter adapter;
     List<Exercises_helper> exerciseList;
-    CreateRoutines createRoutines = new CreateRoutines();
-    String nameE = createRoutines.eName;
+
+
 
 
 
@@ -77,16 +73,6 @@ public class RecordWorkout extends AppCompatActivity {
                 ;
 
         query.addValueEventListener(valueEventListener);
-        /*exerciseList.clear();
-        if (dataSnapshot.exists()){
-            for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                //String s = snapshot.getValue(String.class);
-
-                Exercises_helper exercises_helper = snapshot.getValue(Exercises_helper.class);
-                exerciseList.add(exercises_helper);
-            }
-
-            adapter.notifyDataSetChanged();*/
 
     }
     ValueEventListener valueEventListener = new ValueEventListener() {

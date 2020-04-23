@@ -15,7 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RepHandler"></activity>
+        <activity android:name=".RepHandler" />
         <activity android:name=".RecordWorkout" />
         <activity android:name=".CreateRoutines" />
         <activity android:name=".Exercises_for_routines" />
@@ -37,6 +37,12 @@
             android:name=".nav_main_page"
             android:label="@string/title_activity_nav_main" />
         <activity android:name=".Register" />
+
+        <service android:name=".ListenerService">
+            <intent-filter>
+                <action android:name="com.google.android.gms.wearable.MESSAGE_RECEIVED" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>
