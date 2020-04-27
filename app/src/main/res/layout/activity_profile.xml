@@ -151,13 +151,23 @@
             android:id="@+id/update_details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/lLWeight"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="40dp"
             android:background="@color/colorPrimary"
             android:text="@string/update_stats"
             android:textColor="#ffffff"
+            android:layout_above="@+id/logOut"
+            />
 
+        <Button
+            android:id="@+id/logOut"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="0dp"
+            android:background="#FD0606"
+            android:text="@string/sign_out"
+            android:textColor="#ffffff"
             />
 
 

@@ -4,11 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_height="100dp"
     app:cardElevation="10dp"
     app:cardCornerRadius="10dp"
-    android:layout_margin="10dp"
+    android:layout_margin="20dp"
+    android:layout_marginTop="10dp"
     android:backgroundTint="@color/colorPrimary"
+
     >
 
     <RelativeLayout
@@ -21,74 +23,160 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="30sp"
             android:text="@string/exercise"
             android:id="@+id/excTV"
             android:textAlignment="center"
             />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:id="@+id/rLSets"
-            android:layout_below="@+id/excTV"
-            android:layout_marginTop="15dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="@string/set"
-            android:id="@+id/setSetsTV"
-
-            />
-            <TextView
+            <!--<RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@+id/setSetsTV"
-                android:layout_marginLeft="10dp"
-                android:id="@+id/TVsetsNumber"
-                android:text="0"
-                android:textSize="20sp"/>
+                android:orientation="horizontal"
+                android:layout_below="@+id/excTV"
+                android:id="@+id/setRepsRL"
+                android:layout_centerHorizontal="true">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:id="@+id/rLSets"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="5dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:text="@string/set"
+                        android:id="@+id/setSetsTV"
+                        android:layout_centerVertical="true"
+                        />
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@+id/setSetsTV"
+                            android:layout_marginLeft="10dp"
+                            android:id="@+id/etSetsNumber"
+                            android:text="0"
+                            android:textSize="20sp"/>
 
 
-        </RelativeLayout>
+                    </RelativeLayout>
 
-        <RelativeLayout
+                                <RelativeLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:id="@+id/rLReps"
+                                   android:layout_centerInParent="true"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginStart="20dp"
+                                    android:layout_toEndOf="@+id/rLSets">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="20sp"
+                                        android:text="@string/reps"
+                                        android:id="@+id/setRepsTV"
+                                        android:layout_centerVertical="true"
+                                        />
+                                    <EditText
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_toEndOf="@+id/setRepsTV"
+                                        android:layout_marginLeft="10dp"
+                                        android:id="@+id/etRepsNumber"
+                                        android:text="0"
+                                        android:textSize="20sp"/>
+
+                                </RelativeLayout>
+             </RelativeLayout>-->
+
+        <!--<RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:id="@+id/rLReps"
-            android:layout_below="@+id/rLSets"
-            android:layout_marginTop="15dp">
+            android:layout_below="@+id/setRepsRL"
+            android:id="@+id/finalRL"
+            >
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:text="@string/reps"
-                android:id="@+id/setRepsTV"
-
+                android:text="@string/total_reps"
+                android:id="@+id/totalRepsTV"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@+id/setRepsTV"
+                android:layout_toEndOf="@+id/totalRepsTV"
                 android:layout_marginLeft="10dp"
-                android:id="@+id/TVRepsNumber"
+                android:id="@+id/totalReps"
                 android:text="0"
-                android:textSize="20sp"/>
-
-
+                android:textSize="20sp"
+                android:layout_centerHorizontal="true"/>
         </RelativeLayout>
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@+id/finalRL"
+                android:id="@+id/recivedRL"
+                android:layout_marginTop="5dp"
+                >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="@string/reps_recorded"
+                android:id="@+id/RepsRecievedTV"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/RepsRecievedTV"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/RepsRecievedNum"
+                android:text="0"
+                android:textSize="20sp"
+                android:layout_centerHorizontal="true"/>
+
+
+
+        </RelativeLayout>-->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/excTV"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            >
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rLReps"
-            android:layout_marginTop="15dp"
+            android:text="@string/start_exercise"
+            android:id="@+id/countReps_Btn"
+            />
+
+        <!--<Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/count_reps"
+            android:layout_toEndOf="@id/countReps_Btn"
             android:layout_centerHorizontal="true"
-            android:id="@+id/countReps_Btn"/>
+            android:id="@+id/remove_Btn"/>-->
+
+        </RelativeLayout>
 
     </RelativeLayout>
 

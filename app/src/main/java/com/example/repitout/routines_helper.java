@@ -11,15 +11,15 @@ public class routines_helper {
     public String month;
     public String year;
 
-    public routines_helper(String dbExercise) {
-        this.dbExercise = dbExercise;
-    }
+
 
     private String dbExercise;
     private ArrayList<String> excList;
 
-    public routines_helper() {
+    public routines_helper(String name) {
+        this.name = name;
     }
+
 
     public routines_helper(String name, String day, String month, String year) {
         this.name = name;

@@ -4,70 +4,204 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RepHandler">
+    tools:context=".RepHandler"
+    android:background="#ffffff">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/messageTV"
-        android:text="@string/record_your_reps"
-        android:layout_centerHorizontal="true"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
         android:textSize="30sp"
-        android:layout_alignParentTop="true"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/SetsTextv"
-        android:text="@string/set"
-        android:layout_below="@+id/messageTV"
-        android:textSize="25sp"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="20dp"
+        android:background="@drawable/flex"
+        android:text="@string/exercise"
+        android:textColor="#ffffff"
+        android:id="@+id/excTV"
+        android:textAlignment="center"
         />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/ETSets"
-        android:text="0"
-        android:textSize="30sp"
-        android:layout_toEndOf="@+id/SetsTextv"
-        android:layout_below="@+id/messageTV"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="8dp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/RepsTextv"
-        android:text="@string/reps"
-        android:layout_below="@+id/SetsTextv"
-        android:textSize="25sp"
-        android:layout_marginTop="50dp"
-        android:layout_marginStart="20dp"/>
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/ETReps"
-        android:text="0"
-        android:textSize="30sp"
-        android:layout_toEndOf="@+id/RepsTextv"
-        android:layout_below="@+id/ETSets"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="22dp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:orientation="vertical"
+        android:layout_margin="5dp"
+        android:layout_marginTop="10dp"
+        android:background="#ffffff"
+        android:layout_below="@id/excTV"
+        android:id="@+id/RLnoMoreNames">
 
 
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/setRepsRL"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/rLSets"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="5dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:textColor="@color/black"
+                    android:text="@string/Set"
+                    android:id="@+id/setSetsTV"
+                    android:layout_centerVertical="true"
+                    />
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/setSetsTV"
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/etSetsNumber"
+                    android:text="0"
+                    android:textSize="20sp"/>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/rLReps"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="20dp"
+                android:layout_toEndOf="@+id/rLSets">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="@string/reps"
+                    android:textColor="@color/black"
+                    android:id="@+id/setRepsTV"
+                    android:layout_centerVertical="true"
+                    />
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/setRepsTV"
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/etRepsNumber"
+                    android:text="0"
+                    android:textSize="20sp"/>
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@+id/setRepsRL"
+            android:layout_marginTop="10dp"
+            android:id="@+id/finalRL"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="@string/total_reps"
+                android:id="@+id/totalRepsTV"
+                android:textColor="@color/black"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/totalRepsTV"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/totalReps"
+                android:text="0"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:layout_centerHorizontal="true"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@+id/finalRL"
+            android:id="@+id/recivedRL"
+            android:layout_marginTop="10dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/RepsRecievedNum"
+                android:text="@string/reps_recorded"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:layout_centerHorizontal="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:layout_toEndOf="@+id/RepsRecievedNum"
+                android:text="0"
+                android:layout_marginStart="10dp"
+                android:textColor="@color/black"
+                android:id="@+id/RepsRecievedTV"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                />
+
+
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/recivedRL"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:id="@+id/RLLL"
+            >
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/add_sets_and_reps"
+                android:id="@+id/countReps_Btn"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/count_reps"
+                android:onClick="talkClick"
+                android:layout_toEndOf="@id/countReps_Btn"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/send_Btn"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/saveBtn"
+        android:text="@string/save"
+        android:textColor="#ffffff"
+        android:background="@color/colorPrimary"
+        android:layout_margin="5dp"
         android:layout_alignParentBottom="true"
-        android:text="@string/count_reps"
-        android:onClick="onStartWearableActivityClick"
-        android:textColor="@color/colorPrimary"
-        android:id="@+id/BTNdataCall"/>
+        android:layout_centerHorizontal="true"/>
+
 
 
 </RelativeLayout>

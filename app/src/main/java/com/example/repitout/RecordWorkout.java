@@ -3,13 +3,16 @@ package com.example.repitout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -34,11 +37,18 @@ public class RecordWorkout extends AppCompatActivity {
     TextView routineName;
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+    DatabaseReference db;
+    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Workout");
     String userID = firebaseUser.getUid();
-    String routName;
+    String routName, dayOfWeek ,days,finalday, daysCR;
+    Button addExercises, deleteExc;
     RecyclerView rV;
     ExcercisesAdapter adapter;
     List<Exercises_helper> exerciseList;
+    ArrayList<String> exercises ;
+    Map<String,String> exerciseMap;
+    ArrayList<String> exc ;
+    public Query query;
 
 
 
@@ -56,18 +66,52 @@ public class RecordWorkout extends AppCompatActivity {
         rV.setLayoutManager(new LinearLayoutManager(this));
         adapter = new ExcercisesAdapter(this, exerciseList);
         rV.setAdapter(adapter);
+        addExercises = findViewById(R.id.add_moreExercises);
+        addExercises.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent2 = new Intent(RecordWorkout.this,Exercises_for_routines.class);
+                intent2.putExtra("Day", days);
+                startActivity(intent2);
+            }
+        });
 
+        //data from create routines
         Intent intent = getIntent();
-        routName = intent.getStringExtra("Routine Name");
-        String eDate = intent.getStringExtra("date");
-        routineName.setText(routName + "\n" + "\n" + eDate);
+        routName = intent.getStringExtra("Routine Name ");
+        days =  routName;
+        daysCR = intent.getStringExtra("daysNameCR");
+
+        //from listforcreateRoutines
+        dayOfWeek = intent.getStringExtra("dayName");
+        exercises= intent.getStringArrayListExtra("exercises");
+
+        //checks which activity it is getting the day name from and sets the textview accordingly
+        //also uses the vairable to query the firebase in order to get the correct exercises for the day
+        if (days != null ){
+            finalday = days;
+        }else if (dayOfWeek != null){
+            finalday = dayOfWeek;
+        }else if (daysCR !=null){
+            finalday = daysCR;
+        }
+        routineName.setText(finalday);
+
+        //send current day of the week to rephandler class to save data to correct db node
+        Intent intent1 = new Intent(this, ExcercisesAdapter.class);
+        intent1.putExtra("Day",finalday);
+        LocalBroadcastManager.getInstance(RecordWorkout.this).sendBroadcast(intent1);
 
 
-        DatabaseReference dbr = FirebaseDatabase.getInstance().getReference().child("Workout").child(userID).child("Routines").child(routName).child("exercises");
-        Query query = FirebaseDatabase.getInstance().getReference("Workout")
+
+
+        //query the database to get the list of exercises for each day
+        //days variable need to be passed from different activities.this is
+        //to know which day it is querying
+         query = FirebaseDatabase.getInstance().getReference("Workout")
                 .child(userID)
                 .child("Routines")
-                .child(routName)
+                .child(finalday) //as a result of if/else statement above
                 .child("Exercises")
                 .orderByValue()
                 ;
@@ -83,11 +127,11 @@ public class RecordWorkout extends AppCompatActivity {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                     String name = snapshot.getKey();
 
-                    Exercises_helper helper = new Exercises_helper(name);
+                    Exercises_helper helper = new Exercises_helper(name);//gets name of exercises
                     exerciseList.add(helper);
 
                 }
-                adapter.notifyDataSetChanged();
+                adapter.notifyDataSetChanged(); //updates recycler view with latest entries to db
             }
         }
 
@@ -96,6 +140,8 @@ public class RecordWorkout extends AppCompatActivity {
 
         }
     };
+
+
 
 
 

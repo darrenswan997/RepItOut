@@ -6,9 +6,12 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,20 +25,23 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CreateRoutines extends AppCompatActivity {
-    EditText newRoutineName, date;
+public class CreateRoutines extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+    EditText newRoutineName;
 
     int startYear, startMonth,startDay;
     TextView selectedDate, exercizes_TV;
-    String routine, eName;
-    String year, month, day;
+    public String routine, eName, dayofWeek;
+    Spinner spinner;
+    ArrayList<String> days = new ArrayList<>();
+    //String[] days = {"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
     Button saveDetails, addExercises;
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Workout");
     ArrayList<String> exercises ;
     DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("routines");
     Map<String,String> exerciseMap;
-    public ArrayList<String> exc ;
+    ArrayList<String> exc ;
+    ArrayAdapter dowApadter ;
 
 
     @Override
@@ -43,23 +49,35 @@ public class CreateRoutines extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_routines);
 
-        selectedDate = findViewById(R.id.dateTV2);
         saveDetails = findViewById(R.id.saveRoutine);
-        newRoutineName = findViewById(R.id.routineNameET);
+        spinner = findViewById(R.id.Spinner);
         exercizes_TV = findViewById(R.id.excersizesTV);
         addExercises = findViewById(R.id.addExercisesBtn);
+        days.add("Monday");
+        days.add("Tuesday");
+        days.add("Wednesday");
+        days.add("Thursday");
+        days.add("Friday");
+        days.add("Saturday");
+        days.add("Sunday");
+
+        dowApadter = new ArrayAdapter(this,android.R.layout.simple_spinner_dropdown_item,days);
+        spinner.setAdapter(dowApadter);
+        spinner.setOnItemSelectedListener(this);
 
         exerciseMap = new HashMap<>();
 
         addExercises.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(CreateRoutines.this, Exercises_for_routines.class));
+                Intent intent = new Intent(CreateRoutines.this,ListForCreateRoutines.class);
+                intent.putExtra("day",routine);
+                startActivity(intent);
             }
         });
 
+        //intent from listforcreateroutines
         Intent intent = getIntent();
-
         exercises= intent.getStringArrayListExtra("exercises");
 
         StringBuilder builder = new StringBuilder();
@@ -109,31 +127,30 @@ public class CreateRoutines extends AppCompatActivity {
         saveDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                routine = newRoutineName.getText().toString();
-                day = String.valueOf(startDay);
-                month = String.valueOf(startMonth+1);
-                year = String.valueOf(startYear);
-                //exercise_List = exercises.toString();
-
-
-                //map<>.put("exercise",name)
-
-                if (routine.isEmpty()){
-                    newRoutineName.setError("Enter routine name");
-                    newRoutineName.requestFocus();
-                }
-               // saveExercises();
                 saveRoutine();
-                startActivity(new Intent(CreateRoutines.this, Profile.class));
+                startActivity(new Intent(CreateRoutines.this, routines.class));
             }
         });
+
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        
+        dayofWeek  = parent.getSelectedItem().toString();
+        routine = dayofWeek;
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
 
     }
 
     private void saveRoutine() {
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         String userID = firebaseUser.getUid();
-        routines_helper routines = new routines_helper(routine, day, month, year);
+        routines_helper routines = new routines_helper(routine);
+        routine = dayofWeek;
         db = databaseReference.child(userID).child("Routines").child(routine);
         DatabaseReference dbr = db.child("Exercises");
 
@@ -154,7 +171,6 @@ public class CreateRoutines extends AppCompatActivity {
         Toast.makeText(this, "Your routine has been recorded", Toast.LENGTH_LONG).show();
 
     }
-
 
 
 

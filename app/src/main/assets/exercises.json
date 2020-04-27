@@ -2,6 +2,11 @@
 	"exercises": [
 		{
 
+			"title": "REST DAY",
+			"link": "https://www.healthline.com/health/exercise-fitness/rest-day"
+		},
+		{
+
 			"title": "Oblique crunch",
 			"link": "https://vimeo.com/155006020"
 		},
@@ -150,5 +155,6 @@
 			"title": "Hip trust",
 			"link": "https://vimeo.com/326314251"
 		}
+
 	]
 }

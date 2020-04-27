@@ -1,6 +1,5 @@
 package com.example.repitout;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -12,23 +11,18 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Exercises_for_routines extends AppCompatActivity {
+public class ListForCreateRoutines extends AppCompatActivity {
 
     public ListView execerise_lv;
     public ArrayList<Workout> wList;
@@ -49,19 +43,17 @@ public class Exercises_for_routines extends AppCompatActivity {
     Map<String, String> exerciseMap;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_exercises_for_routines);
-
+        setContentView(R.layout.activity_list_for_create_routines);
         fab = findViewById(R.id.confirm);
         execerise_lv = findViewById(R.id.exercise_list);
         day = findViewById(R.id.WoD);
 
         //from record workout
         Intent intent2 = getIntent();
-        stri = intent2.getStringExtra("Day");
+        stri = intent2.getStringExtra("day");
         name = stri;
         day.setText(name);
         exerciseMap = new HashMap<>();
@@ -77,11 +69,11 @@ public class Exercises_for_routines extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveRoutine();
-                Intent intent = new Intent(Exercises_for_routines.this,RecordWorkout.class);
+                Intent intent = new Intent(ListForCreateRoutines.this,CreateRoutines.class);
+                //pass list of exercises back to record workout
                 intent.putExtra("exercises",exercises);
                 //pass the day of the week value back to record workout
-                intent.putExtra("dayName", name);
+                //intent.putExtra("dayNameCR", name);
                 startActivity(intent);
             }
         });
@@ -95,21 +87,21 @@ public class Exercises_for_routines extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //String exercise = titleList.get(position);
 
-                 exercise = (execerise_lv.getItemAtPosition(position)).toString();
-                 if (exercises.contains(exercise)){
-                     exercises.remove(exercise);
-                     view.setBackgroundColor(Color.WHITE);
+                exercise = (execerise_lv.getItemAtPosition(position)).toString();
+                if (exercises.contains(exercise)){
+                    exercises.remove(exercise);
+                    view.setBackgroundColor(Color.WHITE);
 
-                 }else{
-                     exercises.add(exercise);
-                     view.setBackgroundColor(Color.GREEN);
-                 }
+                }else{
+                    exercises.add(exercise);
+                    view.setBackgroundColor(Color.GREEN);
+                }
             }
         });
 
 
     }
-    private void saveRoutine() {
+    /*private void saveRoutine() {
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         String userID = firebaseUser.getUid();
         routines_helper routines = new routines_helper(name);
@@ -126,10 +118,9 @@ public class Exercises_for_routines extends AppCompatActivity {
             Exercises_helper helper = new Exercises_helper(s, exerciseMap);
 
             dbr.child(eName).setValue(exerciseMap);
-        }
+        }*/
 
 
-    }
 
 }
 

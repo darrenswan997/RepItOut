@@ -78,7 +78,8 @@ public class routines extends nav_main_page {
             routinesList.clear();
             if (dataSnapshot.exists()){
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    routines_helper helper = snapshot.getValue(routines_helper.class);
+                    String name = snapshot.getKey();
+                    routines_helper helper = new routines_helper(name);
                     routinesList.add(helper);
 
                 }

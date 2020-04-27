@@ -71,7 +71,17 @@
     <string name="waiting_for_reps">waiting for reps...</string>
     <string name="counted">Reps counted</string>
     <string name="record_your_reps">Record your reps</string>
-    
+    <string name="day_of_the_week">Day of the week</string>
+    <string name="add_sets_and_reps">Add Sets and Reps</string>
+    <string name="total_reps">Total Reps</string>
+    <string name="remove_exercise">Remove Exercise</string>
+    <string name="edit_exercise_selection">Edit exercise selection</string>
+    <string name="day">Day</string>
+    <string name="reps_recorded">Reps Recorded</string>
+    <string name="start_workout">Start Workout</string>
+    <string name="start_exercise">Start Exercise</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="Set">Set :</string>
 
 
 </resources>

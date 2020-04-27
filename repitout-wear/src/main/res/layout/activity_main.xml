@@ -21,10 +21,38 @@
             android:layout_height="wrap_content"
             android:text="@string/Welcome_repItOut"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp"/>
+            android:layout_marginTop="25dp"
+            android:textColor="@color/black"/>
 
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/RepsRL"
+            android:layout_below="@+id/text"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
 
+        <!--<TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/number_of_reps"
+            android:id="@+id/TVmsg"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="30dp"
+            android:textColor="@color/black"/>-->
+
+            <TextView
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/repsFromPhone"
+                android:text="@string/_0"
+               android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="15dp"
+                android:textColor="@color/black"/>
+
+        </RelativeLayout>
         <Button
             android:id="@+id/rep_counter"
             android:layout_width="wrap_content"
@@ -32,8 +60,9 @@
             android:text="@string/count_reps"
             android:visibility="visible"
             android:layout_centerHorizontal="true"
-            android:layout_below="@id/text"
-            android:layout_marginTop="10dp"
+            android:layout_below="@id/RepsRL"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/round_button"
             />
 
         <!--<Button
