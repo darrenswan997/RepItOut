@@ -84,6 +84,8 @@
     <string name="Set">Set :</string>
     <string name="Weight">Weight</string>
     <string name="recent_workouts">Recent Workouts</string>
+    <string name="previous_session">Previous Session :</string>
+    <string name="previous_session_reps">Previous Session Reps :</string>
 
 
 </resources>

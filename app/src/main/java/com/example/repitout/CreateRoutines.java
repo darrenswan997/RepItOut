@@ -128,8 +128,10 @@ public class CreateRoutines extends AppCompatActivity implements AdapterView.OnI
             eName = s;
              exc = new ArrayList<String>();
              exc.add(eName);
+             String reps = "0";
+             Exercises_helper exercises_helper = new Exercises_helper(eName, reps);
             exerciseMap.put("Exercises",eName);
-            dbr.child(eName).setValue(exerciseMap);
+            dbr.child(eName).setValue(exercises_helper);
         }
 
 

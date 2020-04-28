@@ -46,7 +46,7 @@ public class Exercises_for_routines extends AppCompatActivity {
     DatabaseReference db;
     DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child("Workout").child(userID).child("Routines").child("name");
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Workout");
-    String stri, name, eName;
+    String stri, name, eName, rName;
     TextView day;
     ArrayList<String> exc ;
     Map<String, String> exerciseMap;
@@ -66,8 +66,8 @@ public class Exercises_for_routines extends AppCompatActivity {
         //from record workout
         Intent intent2 = getIntent();
         stri = intent2.getStringExtra("Day");
-        name = stri;
-        day.setText(name);
+        rName = stri;
+        day.setText(rName);
         exerciseMap = new HashMap<>();
 
         SharedPreferences sharedPreferences = this.getSharedPreferences("DayFB", Context.MODE_PRIVATE);
@@ -90,7 +90,7 @@ public class Exercises_for_routines extends AppCompatActivity {
                 Intent intent = new Intent(Exercises_for_routines.this,RecordWorkout.class);
                 intent.putExtra("exercises",exercises);
                 //pass the day of the week value back to record workout
-                intent.putExtra("dayName", name);
+                intent.putExtra("dayName", rName);
                 startActivity(intent);
             }
         });
@@ -121,20 +121,20 @@ public class Exercises_for_routines extends AppCompatActivity {
     private void saveRoutine() {
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         String userID = firebaseUser.getUid();
-        routines_helper routines = new routines_helper(name);
-        db = databaseReference.child(userID).child("Routines").child(name);
+        routines_helper routines = new routines_helper(rName);
+        db = databaseReference.child(userID).child("Routines").child(rName);
         DatabaseReference dbr = db.child("Exercises");
 
 
         db.setValue(routines);
         for (String s : exercises) {
-            eName = s;
+            name = s;
             exc = new ArrayList<String>();
             exc.add(eName);
-            exerciseMap.put("Exercises", eName);
-            Exercises_helper helper = new Exercises_helper(s, exerciseMap);
+            exerciseMap.put("Exercises", name);
+            Exercises_helper helper = new Exercises_helper(name);
 
-            dbr.child(eName).setValue(exerciseMap);
+            dbr.child(name).setValue(exerciseMap);
         }
 
 

@@ -19,6 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ExcercisesAdapter extends RecyclerView.Adapter<ExcercisesAdapter.ExercisesViewHolder>{
 
@@ -51,7 +52,9 @@ public class ExcercisesAdapter extends RecyclerView.Adapter<ExcercisesAdapter.Ex
     public void onBindViewHolder(@NonNull ExercisesViewHolder holder, int position) {
         Exercises_helper exercises_helper = exercisesList.get(position);
         String name = exercises_helper.getName();
+        String reps = exercises_helper.getReps();
         holder.exercise_name.setText(name);
+        holder.prevReps.setText(reps);
         holder.addRepsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,12 +78,13 @@ public class ExcercisesAdapter extends RecyclerView.Adapter<ExcercisesAdapter.Ex
     }
 
     public class ExercisesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        TextView exercise_name;
+        TextView exercise_name , prevReps;
         Button addRepsBtn;
 
         public ExercisesViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            prevReps = itemView.findViewById(R.id.PrevRepsVal);
             exercise_name = itemView.findViewById(R.id.excTV);
             addRepsBtn = itemView.findViewById(R.id.countReps_Btn);
         }

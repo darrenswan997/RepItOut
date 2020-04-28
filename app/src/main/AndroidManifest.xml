@@ -16,15 +16,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ListForCreateRoutines"></activity>
-        <activity android:name=".RecordWorkout"
-            android:parentActivityName=".routines"/>
-        <activity android:name=".RepHandler"
-            android:parentActivityName=".RecordWorkout"/>
+        <activity android:name=".RecordWorkout" />
+        <activity android:name=".RepHandler" />
         <activity android:name=".CreateRoutines" />
         <activity android:name=".Exercises_for_routines"/>
         <activity android:name=".User_details" />
         <activity android:name=".Profile" />
-        <activity android:name=".Progress" />
         <activity android:name=".routines" />
         <activity android:name=".DetailActivity"
             android:parentActivityName=".Exercises"/>

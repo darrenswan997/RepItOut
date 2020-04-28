@@ -5,6 +5,12 @@ import java.util.Map;
 public class Exercises_helper {
     public String name;
     public String reps;
+
+    public Exercises_helper(String name, String reps) {
+        this.name = name;
+        this.reps = reps;
+    }
+
     public String sets;
     public Map<String,String> exerciseMap;
 
@@ -35,7 +41,7 @@ public class Exercises_helper {
         this.exerciseMap = exercises;
     }
 
-    public Exercises_helper(String eName, Map<String, String> exerciseMap) {
+    public Exercises_helper() {
     }
 
 

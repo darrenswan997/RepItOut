@@ -49,9 +49,6 @@ public class nav_main_page extends AppCompatActivity {
                     case R.id.nav_my_profile:
                         startActivity(new Intent(nav_main_page.this,Profile.class));
                         break;
-                    case R.id.nav_my_progress:
-                        startActivity(new Intent(nav_main_page.this,Progress.class));
-                        break;
                         default:
                             return true;
                 }

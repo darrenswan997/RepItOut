@@ -37,19 +37,33 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/excTV"
             android:orientation="horizontal"
-            android:gravity="center_horizontal"
             android:layout_marginTop="10dp"
+            android:id="@+id/relL"
             >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/PrevReps"
+                android:text="@string/previous_session_reps"
+                android:layout_centerInParent="true"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/PrevReps"
+                android:id="@+id/PrevRepsVal"
+                android:text=" 0"/>
+
+        </RelativeLayout>
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/start_exercise"
             android:id="@+id/countReps_Btn"
+            android:layout_below="@+id/relL"
+            android:layout_centerHorizontal="true"
             />
-
-
-
-        </RelativeLayout>
 
     </RelativeLayout>
 

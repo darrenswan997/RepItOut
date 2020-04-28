@@ -50,7 +50,6 @@ public class RepHandler extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rep_handler);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         excTV = findViewById(R.id.excTV);
         setsET = findViewById(R.id.etSetsNumber);
@@ -61,7 +60,7 @@ public class RepHandler extends AppCompatActivity {
         sendReps = findViewById(R.id.send_Btn);
         repsRecNum = findViewById(R.id.RepsRecievedNum);
         saveReps = findViewById(R.id.saveBtn);
-        //saveReps.setEnabled(false);
+
 
         //get exercises name
         Intent intent = getIntent();
@@ -116,7 +115,10 @@ public class RepHandler extends AppCompatActivity {
                 Toast.makeText(this,"You have not recorded any reps",Toast.LENGTH_SHORT).show();
             }else {
                 saveReps();
-                startActivity(new Intent(RepHandler.this, routines.class));
+                String repss = receivedReps.getText().toString();
+                Intent intent1 = new Intent(RepHandler.this, RecordWorkout.class);
+                intent1.putExtra("repetitions", repss);
+                startActivity(intent1);
             }
         });
 
@@ -211,9 +213,10 @@ public class RepHandler extends AppCompatActivity {
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         String userID = firebaseUser.getUid();
         Reps_helper reps_helper = new Reps_helper(data);
+        Exercises_helper exercises_helper = new Exercises_helper(q, data);
         db = databaseReference.child(userID).child("Routines").child(day).child("Exercises");
         DatabaseReference dbr = db.child(q);
-        dbr.push().setValue(reps_helper);
+        dbr.setValue(exercises_helper);
         Toast.makeText(this, "Your Reps have been recorded", Toast.LENGTH_LONG).show();
     }
 }

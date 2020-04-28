@@ -42,7 +42,7 @@ public class RecordWorkout extends AppCompatActivity {
     DatabaseReference db;
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Workout");
     String userID = firebaseUser.getUid();
-    String routName, dayOfWeek ,days,finalday, daysCR ,exercises_FR;
+    String routName, dayOfWeek ,days,finalday, daysCR ,exerciseReps;
     Button addExercises, deleteExc;
     RecyclerView rV;
     ExcercisesAdapter adapter;
@@ -60,7 +60,7 @@ public class RecordWorkout extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_workout);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         routineName = findViewById(R.id.tVRoutineName);
         exerciseList = new ArrayList<>();
@@ -80,6 +80,8 @@ public class RecordWorkout extends AppCompatActivity {
         Intent intent = getIntent();
         routName = intent.getStringExtra("Routine Name ");
         days =  routName;
+
+        //get data
 
         daysCR = intent.getStringExtra("daysNameCR");
 
@@ -132,10 +134,12 @@ public class RecordWorkout extends AppCompatActivity {
             exerciseList.clear();
             if (dataSnapshot.exists()){
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    String name = snapshot.getKey();
+                    Exercises_helper eHelper = snapshot.getValue(Exercises_helper.class);
+                    exerciseList.add(eHelper);
 
+                    String name = snapshot.getKey();
                     Exercises_helper helper = new Exercises_helper(name);//gets name of exercises
-                    exerciseList.add(helper);
+                    //exerciseList.add(helper);
 
 
                 }
