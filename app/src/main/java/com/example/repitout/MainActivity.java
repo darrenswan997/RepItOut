@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                         etPassword.setText("");
 
                         Toast.makeText(MainActivity.this, "Log in Successful", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(MainActivity.this,Exercises.class));
+                        startActivity(new Intent(MainActivity.this,Profile.class));
                         finish();
                     }
 

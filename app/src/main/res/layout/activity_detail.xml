@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/darkGrey"
+    android:background="#ffffff"
     android:orientation="vertical"
     tools:context=".DetailActivity">
 
@@ -15,7 +15,7 @@
         android:layout_margin="24dp"
         android:gravity="center"
         android:text="@string/title"
-        android:textColor="#ffffff"
+        android:textColor="@color/black"
         android:textSize="36sp" />
 
     <TextView
@@ -27,7 +27,7 @@
         android:gravity="left"
         android:linksClickable="true"
         android:text="@string/link"
-        android:textColor="#ffffff"
+        android:textColor="@color/black"
         android:textSize="24sp" />
 
 </LinearLayout>

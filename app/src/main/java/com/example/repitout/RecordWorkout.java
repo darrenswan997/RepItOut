@@ -7,7 +7,9 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -40,7 +42,7 @@ public class RecordWorkout extends AppCompatActivity {
     DatabaseReference db;
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Workout");
     String userID = firebaseUser.getUid();
-    String routName, dayOfWeek ,days,finalday, daysCR;
+    String routName, dayOfWeek ,days,finalday, daysCR ,exercises_FR;
     Button addExercises, deleteExc;
     RecyclerView rV;
     ExcercisesAdapter adapter;
@@ -58,6 +60,7 @@ public class RecordWorkout extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_workout);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         routineName = findViewById(R.id.tVRoutineName);
         exerciseList = new ArrayList<>();
@@ -67,24 +70,23 @@ public class RecordWorkout extends AppCompatActivity {
         adapter = new ExcercisesAdapter(this, exerciseList);
         rV.setAdapter(adapter);
         addExercises = findViewById(R.id.add_moreExercises);
-        addExercises.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent2 = new Intent(RecordWorkout.this,Exercises_for_routines.class);
-                intent2.putExtra("Day", days);
-                startActivity(intent2);
-            }
+        addExercises.setOnClickListener(v -> {
+            Intent intent2 = new Intent(RecordWorkout.this,Exercises_for_routines.class);
+            intent2.putExtra("Day", days);
+            startActivity(intent2);
         });
 
         //data from create routines
         Intent intent = getIntent();
         routName = intent.getStringExtra("Routine Name ");
         days =  routName;
+
         daysCR = intent.getStringExtra("daysNameCR");
 
         //from listforcreateRoutines
         dayOfWeek = intent.getStringExtra("dayName");
         exercises= intent.getStringArrayListExtra("exercises");
+
 
         //checks which activity it is getting the day name from and sets the textview accordingly
         //also uses the vairable to query the firebase in order to get the correct exercises for the day
@@ -97,11 +99,16 @@ public class RecordWorkout extends AppCompatActivity {
         }
         routineName.setText(finalday);
 
-        //send current day of the week to rephandler class to save data to correct db node
+        //sharedPreference to send day to rephandler class
+        SharedPreferences sharedPreferences = this.getSharedPreferences("DayForDB", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("DayW",finalday);
+        editor.apply();
+
+//send current day of the week to rephandler class to save data to correct db node
         Intent intent1 = new Intent(this, ExcercisesAdapter.class);
         intent1.putExtra("Day",finalday);
         LocalBroadcastManager.getInstance(RecordWorkout.this).sendBroadcast(intent1);
-
 
 
 
@@ -130,7 +137,9 @@ public class RecordWorkout extends AppCompatActivity {
                     Exercises_helper helper = new Exercises_helper(name);//gets name of exercises
                     exerciseList.add(helper);
 
+
                 }
+
                 adapter.notifyDataSetChanged(); //updates recycler view with latest entries to db
             }
         }

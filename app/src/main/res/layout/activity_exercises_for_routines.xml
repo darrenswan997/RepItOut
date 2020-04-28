@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:src="@drawable/ic_dumbell"
+        android:src="@drawable/ic_done_black_24dp"
         app:fabSize="normal" />
 
 

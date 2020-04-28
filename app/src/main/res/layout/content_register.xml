@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="fill_parent"
     android:background="@drawable/background_color"
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="0dp"
@@ -24,8 +24,9 @@
             android:layout_marginTop="150dp"
             android:text="@string/Details"
             android:textAlignment="center"
-            android:textColor="@android:color/black"
-            android:textSize="22sp" />
+            android:textColor="#ffffff"
+            android:textSize="22sp"
+            />
 
         <EditText
             android:id="@+id/etNameUserReg"
@@ -38,7 +39,8 @@
             android:hint="@string/ProfileNameTV"
             android:inputType="textPersonName"
             android:paddingLeft="5dp"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textColor="#ffffff"/>
 
         <EditText
             android:id="@+id/etPhoneUserReg"
@@ -51,7 +53,8 @@
             android:hint="@string/ProfilePhoneTV"
             android:inputType="phone"
             android:paddingLeft="5dp"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textColor="#ffffff"/>
 
         <EditText
             android:id="@+id/etEmailUserReg"
@@ -64,7 +67,8 @@
             android:ems="10"
             android:paddingLeft="5dp"
             android:hint="@string/Email"
-            android:inputType="textEmailAddress"/>
+            android:inputType="textEmailAddress"
+            android:textColor="#ffffff"/>
 
         <EditText
             android:id="@+id/etPassUserReg"
@@ -77,7 +81,8 @@
             android:hint="@string/logPassword"
             android:inputType="textPassword"
             android:paddingLeft="5dp"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textColor="#ffffff"/>
 
         <EditText
             android:id="@+id/etConfPassUserReg"
@@ -89,7 +94,8 @@
             android:ems="10"
             android:hint="@string/confPassword"
             android:inputType="textPassword"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textColor="#ffffff"/>
 
         <Button
             android:id="@+id/btnUserReg"
@@ -100,7 +106,9 @@
             android:layout_marginTop="25dp"
             android:text="@string/btnUserReg"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:background="@color/lightGrey"/>
 
 
     </RelativeLayout>

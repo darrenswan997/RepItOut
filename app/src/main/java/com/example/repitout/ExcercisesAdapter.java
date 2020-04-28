@@ -24,7 +24,6 @@ public class ExcercisesAdapter extends RecyclerView.Adapter<ExcercisesAdapter.Ex
 
     private Context mCtx;
     private List<Exercises_helper> exercisesList;
-    private List<routines_helper> routinesList;
     public ItemClickListener itemClickListener;
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
@@ -34,11 +33,6 @@ public class ExcercisesAdapter extends RecyclerView.Adapter<ExcercisesAdapter.Ex
     DatabaseReference dbRemove;
     String  r;
 
-
-
-    String name;//should be equal to exercise name
-    int numberOfSets = 0;
-    int numberOfReps = 0;
 
     public ExcercisesAdapter(Context mCtx, List<Exercises_helper> exercisesList) {
         this.mCtx = mCtx;
@@ -58,29 +52,15 @@ public class ExcercisesAdapter extends RecyclerView.Adapter<ExcercisesAdapter.Ex
         Exercises_helper exercises_helper = exercisesList.get(position);
         String name = exercises_helper.getName();
         holder.exercise_name.setText(name);
-        //holder.numOfSets.getText().toString();
-        //holder.numOfReps.setText(String.valueOf(numberOfReps));
         holder.addRepsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*String setsval = holder.numOfSets.getText().toString();
-                int setv = Integer.parseInt(setsval);
-                String repsval = holder.numOfReps.getText().toString();
-                int repsv = Integer.parseInt(repsval);
-                int total = (setv * repsv);
-                String r = String.valueOf(total);
-                holder.totalNumOfReps.setText(r);*/
                 Intent intent = new Intent(mCtx, RepHandler.class);
                 intent.putExtra("Exercise", name);
                 mCtx.startActivity(intent);
             }
         });
-        /*holder.countReps.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //send reps to watch
-            }
-        });*/
+
 
     }
     public void removeAt(int pos){
@@ -95,26 +75,14 @@ public class ExcercisesAdapter extends RecyclerView.Adapter<ExcercisesAdapter.Ex
     }
 
     public class ExercisesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        TextView exercise_name, setsTV, repsTV, totalreptv, totalNumOfReps, repsRec, repRecNum;
-        EditText  numOfSets, numOfReps;
-        Button addRepsBtn, countReps;
+        TextView exercise_name;
+        Button addRepsBtn;
 
         public ExercisesViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            //totalreptv = itemView.findViewById(R.id.totalRepsTV);
-            //totalNumOfReps = itemView.findViewById(R.id.totalReps);
             exercise_name = itemView.findViewById(R.id.excTV);
-            //setsTV = itemView.findViewById(R.id.setSetsTV);
-           // numOfSets = itemView.findViewById(R.id.etSetsNumber);
-          //  repsTV = itemView.findViewById(R.id.setRepsTV);
-           // numOfReps = itemView.findViewById(R.id.etRepsNumber);
             addRepsBtn = itemView.findViewById(R.id.countReps_Btn);
-           // countReps = itemView.findViewById(R.id.remove_Btn);
-           // repsRec = itemView.findViewById(R.id.RepsRecievedTV);
-          //  repRecNum = itemView.findViewById(R.id.RepsRecievedNum);
-
-
         }
 
         @Override

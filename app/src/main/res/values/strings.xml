@@ -82,6 +82,8 @@
     <string name="start_exercise">Start Exercise</string>
     <string name="sign_out">Sign Out</string>
     <string name="Set">Set :</string>
+    <string name="Weight">Weight</string>
+    <string name="recent_workouts">Recent Workouts</string>
 
 
 </resources>

@@ -33,7 +33,6 @@ public class CreateRoutines extends AppCompatActivity implements AdapterView.OnI
     public String routine, eName, dayofWeek;
     Spinner spinner;
     ArrayList<String> days = new ArrayList<>();
-    //String[] days = {"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
     Button saveDetails, addExercises;
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Workout");
@@ -94,36 +93,6 @@ public class CreateRoutines extends AppCompatActivity implements AdapterView.OnI
 
 
 
-
-
-        Calendar MyCalendar1 = Calendar.getInstance();
-
-        DatePickerDialog.OnDateSetListener MyOnDateSetListener1 = new DatePickerDialog.OnDateSetListener(){
-            public void onDateSet(DatePicker view, int year, int month, int day) {
-                startYear = year;
-                startMonth = month;
-                startDay = day;
-
-                selectedDate.setText("" + day  + "/" + (month + 1) + "/" + year);
-            }
-        };
-
-        selectedDate.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        new DatePickerDialog(CreateRoutines.this, MyOnDateSetListener1,
-                                MyCalendar1.get(Calendar.YEAR),
-                                MyCalendar1.get(Calendar.MONTH),
-                                MyCalendar1.get(Calendar.DAY_OF_MONTH)
-                        ).show();
-
-                    }
-                }
-
-        );
-
-
         saveDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -136,7 +105,7 @@ public class CreateRoutines extends AppCompatActivity implements AdapterView.OnI
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        
+
         dayofWeek  = parent.getSelectedItem().toString();
         routine = dayofWeek;
     }
@@ -160,12 +129,8 @@ public class CreateRoutines extends AppCompatActivity implements AdapterView.OnI
              exc = new ArrayList<String>();
              exc.add(eName);
             exerciseMap.put("Exercises",eName);
-            //Exercises_helper helper = new Exercises_helper(eName, exerciseMap);
             dbr.child(eName).setValue(exerciseMap);
-            //dbr.child(eName).setValue(exerciseMap); db"routtine name"
         }
-
-
 
 
         Toast.makeText(this, "Your routine has been recorded", Toast.LENGTH_LONG).show();

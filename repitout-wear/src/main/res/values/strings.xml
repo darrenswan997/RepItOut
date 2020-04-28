@@ -25,4 +25,5 @@
     <string name="pause">Pause</string>
     <string name="exercise">Exercise :</string>
     <string name="name">name</string>
+    <string name="waiting_for_exercise">Waiting for exercise</string>
 </resources>

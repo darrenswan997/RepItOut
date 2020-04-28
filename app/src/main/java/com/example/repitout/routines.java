@@ -38,7 +38,7 @@ public class routines extends nav_main_page {
     DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("workout");
     DatabaseReference dbr = db.child(userID);
 
-    ProductAdapter adapter;
+    RoutineAdapter adapter;
     List<routines_helper> routinesList;
 
     @Override
@@ -53,7 +53,7 @@ public class routines extends nav_main_page {
         rv.setHasFixedSize(true);
         rv.setLayoutManager(new LinearLayoutManager(this));
         routinesList = new ArrayList<>();
-        adapter=new ProductAdapter(this, routinesList);
+        adapter=new RoutineAdapter(this, routinesList);
         rv.setAdapter(adapter);
 
         createRoutine = findViewById(R.id.createRoutine);

@@ -17,7 +17,6 @@
         android:background="@drawable/lift"
         android:gravity="center"
         android:textSize="22sp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@color/colorPrimary"
         />
 

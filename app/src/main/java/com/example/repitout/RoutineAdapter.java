@@ -14,12 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
-class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
+class RoutineAdapter extends RecyclerView.Adapter<RoutineAdapter.ProductViewHolder> {
 
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
@@ -37,7 +35,7 @@ class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHold
     public ItemClickListener itemClickListener;
 
 
-    public ProductAdapter(Context mCtx, List<routines_helper> routineList) {
+    public RoutineAdapter(Context mCtx, List<routines_helper> routineList) {
         this.mCtx = mCtx;
         this.routineList = routineList;
     }

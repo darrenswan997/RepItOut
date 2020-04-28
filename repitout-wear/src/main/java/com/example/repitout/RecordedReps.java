@@ -56,6 +56,8 @@ public class RecordedReps extends WearableActivity {
             public void onClick(View v) {
                 String dataPath = "/my_path";
                 new SendMessage(dataPath,reps).start();
+                Intent intent = new Intent(RecordedReps.this,MainActivity.class);
+                startActivity(intent);
             }
         });
 

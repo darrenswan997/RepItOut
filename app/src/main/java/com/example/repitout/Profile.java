@@ -41,7 +41,7 @@ public class Profile extends nav_main_page {
 
     private static final int TAKE_IMAGE_CODE = 10001;
     private static final String TAG = "";
-    Button update;
+    Button update, logout;
     ImageView profileIV;
     TextView user_name, heightTV, weightTV, ageTV;
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
@@ -49,10 +49,6 @@ public class Profile extends nav_main_page {
     String userKey = user.getUid();
     DatabaseReference userDetails = FirebaseDatabase.getInstance().getReference();
 
-   // userDetails.child("Details").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener()
-   /* DatabaseReference userAge = userDetails.child("user_age");
-    DatabaseReference userHeight = userDetails.child("user_height");
-    DatabaseReference userWeight = userDetails.child("user_weight")*/;
 
 
 
@@ -69,6 +65,14 @@ public class Profile extends nav_main_page {
         ageTV = findViewById(R.id.fbAge);
         user_name = findViewById(R.id.title_tv);
         profileIV = findViewById(R.id.Iv_Profile);
+        logout = findViewById(R.id.logOut);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(Profile.this, MainActivity.class));
+            }
+        });
         update= findViewById(R.id.update_details);
         update.setOnClickListener(v -> {
             startActivity(new Intent(Profile.this, User_details.class));

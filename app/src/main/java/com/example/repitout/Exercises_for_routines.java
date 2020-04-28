@@ -3,7 +3,9 @@ package com.example.repitout;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -27,6 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class Exercises_for_routines extends AppCompatActivity {
 
@@ -55,6 +58,7 @@ public class Exercises_for_routines extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercises_for_routines);
 
+
         fab = findViewById(R.id.confirm);
         execerise_lv = findViewById(R.id.exercise_list);
         day = findViewById(R.id.WoD);
@@ -65,6 +69,11 @@ public class Exercises_for_routines extends AppCompatActivity {
         name = stri;
         day.setText(name);
         exerciseMap = new HashMap<>();
+
+        SharedPreferences sharedPreferences = this.getSharedPreferences("DayFB", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("DayB",stri);
+        editor.apply();
 
         wList = DataHelper.loadWorkout(this);
         titleList = new ArrayList<>();

@@ -8,6 +8,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -29,6 +30,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 import static android.util.Config.LOGD;
@@ -38,15 +40,17 @@ public class RepHandler extends AppCompatActivity {
     public EditText setsET, repsET;
     Button repTotal, sendReps , saveReps;
     protected Handler myHandler;
-    String r, q, fromWatch, day,data;
+    String r, q, fromWatch, day,data , newDay , sendback;
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Workout");
     DatabaseReference db;
+    Map<String, String> reps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rep_handler);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         excTV = findViewById(R.id.excTV);
         setsET = findViewById(R.id.etSetsNumber);
@@ -57,10 +61,20 @@ public class RepHandler extends AppCompatActivity {
         sendReps = findViewById(R.id.send_Btn);
         repsRecNum = findViewById(R.id.RepsRecievedNum);
         saveReps = findViewById(R.id.saveBtn);
+        //saveReps.setEnabled(false);
 
+        //get exercises name
         Intent intent = getIntent();
         q = intent.getStringExtra("Exercise");
         excTV.setText(q);
+
+
+
+
+        //retrieve day from sharedPreferences in recordworkout class
+        SharedPreferences sharedPreferences = this.getSharedPreferences("DayForDB",Context.MODE_PRIVATE);
+        day = sharedPreferences.getString("DayW","");
+
 
 
         repTotal.setOnClickListener(new View.OnClickListener() {
@@ -96,13 +110,19 @@ public class RepHandler extends AppCompatActivity {
         Receiver messageReceiver = new Receiver();
         LocalBroadcastManager.getInstance(this).registerReceiver(messageReceiver, messageFilter);
 
-
-        saveReps.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        saveReps.setOnClickListener(v -> {
+            if (receivedReps.getText().equals("0")){
+                saveReps.setClickable(false);
+                Toast.makeText(this,"You have not recorded any reps",Toast.LENGTH_SHORT).show();
+            }else {
                 saveReps();
+                startActivity(new Intent(RepHandler.this, routines.class));
             }
         });
+
+
+
+
 
 
     }
@@ -120,14 +140,9 @@ public class RepHandler extends AppCompatActivity {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            //get currentday name from record workout
-           /* day = intent.getExtras().getString("Day");*/
-
-            //set value from watch
-            //when get message from wearable display it in the textview
-            Bundle bundle = intent.getExtras();
+           Bundle bundle = intent.getExtras();
             data = bundle.getString("reps");
-
+            newDay = intent.getStringExtra("Day");
             receivedReps.setText(data);
         }
     }
@@ -195,9 +210,10 @@ public class RepHandler extends AppCompatActivity {
     private void saveReps() {
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         String userID = firebaseUser.getUid();
-        Exercises_helper exercises_helper = new Exercises_helper(data);
+        Reps_helper reps_helper = new Reps_helper(data);
         db = databaseReference.child(userID).child("Routines").child(day).child("Exercises");
-        DatabaseReference dbr = db.child(q).child("Reps");
-        dbr.push().setValue(exercises_helper);
+        DatabaseReference dbr = db.child(q);
+        dbr.push().setValue(reps_helper);
+        Toast.makeText(this, "Your Reps have been recorded", Toast.LENGTH_LONG).show();
     }
 }
