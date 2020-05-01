@@ -149,7 +149,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:background="@color/colorPrimary"
-            android:text="@string/update_stats"
+            android:text="@string/update_profile"
             android:textSize="16sp"
             android:textColor="#ffffff"
             android:layout_above="@+id/logOut"

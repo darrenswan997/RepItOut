@@ -86,6 +86,9 @@
     <string name="recent_workouts">Recent Workouts</string>
     <string name="previous_session">Previous Session :</string>
     <string name="previous_session_reps">Previous Session Reps :</string>
+    <string name="save_routine">Save Routine</string>
+    <string name="workout_history">Workout History</string>
+    <string name="update_profile">Update Profile</string>
 
 
 </resources>

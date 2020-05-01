@@ -28,6 +28,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ServerValue;
 
 import java.util.List;
 import java.util.Map;
@@ -43,7 +44,7 @@ public class RepHandler extends AppCompatActivity {
     String r, q, fromWatch, day,data , newDay , sendback;
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Workout");
-    DatabaseReference db;
+    DatabaseReference db, dbhist;
     Map<String, String> reps;
 
     @Override
@@ -118,6 +119,7 @@ public class RepHandler extends AppCompatActivity {
                 String repss = receivedReps.getText().toString();
                 Intent intent1 = new Intent(RepHandler.this, RecordWorkout.class);
                 intent1.putExtra("repetitions", repss);
+                intent1.putExtra("DayName", day);
                 startActivity(intent1);
             }
         });
@@ -212,11 +214,13 @@ public class RepHandler extends AppCompatActivity {
     private void saveReps() {
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         String userID = firebaseUser.getUid();
-        Reps_helper reps_helper = new Reps_helper(data);
+        dbhist = databaseReference.child(userID).child("Routine_History").child("Exercises");
+
         Exercises_helper exercises_helper = new Exercises_helper(q, data);
         db = databaseReference.child(userID).child("Routines").child(day).child("Exercises");
         DatabaseReference dbr = db.child(q);
         dbr.setValue(exercises_helper);
+        dbhist.push().setValue(exercises_helper);
         Toast.makeText(this, "Your Reps have been recorded", Toast.LENGTH_LONG).show();
     }
 }

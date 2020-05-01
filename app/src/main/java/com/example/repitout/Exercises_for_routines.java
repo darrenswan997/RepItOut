@@ -121,8 +121,9 @@ public class Exercises_for_routines extends AppCompatActivity {
     private void saveRoutine() {
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         String userID = firebaseUser.getUid();
-        routines_helper routines = new routines_helper(rName);
-        db = databaseReference.child(userID).child("Routines").child(rName);
+        String reps = "0";
+        routines_helper routines = new routines_helper(stri);
+        db = databaseReference.child(userID).child("Routines").child(stri);
         DatabaseReference dbr = db.child("Exercises");
 
 
@@ -132,9 +133,9 @@ public class Exercises_for_routines extends AppCompatActivity {
             exc = new ArrayList<String>();
             exc.add(eName);
             exerciseMap.put("Exercises", name);
-            Exercises_helper helper = new Exercises_helper(name);
+            Exercises_helper helper = new Exercises_helper(name, reps);
 
-            dbr.child(name).setValue(exerciseMap);
+            dbr.child(name).setValue(helper);
         }
 
 

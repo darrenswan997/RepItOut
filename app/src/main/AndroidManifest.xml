@@ -15,16 +15,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ListForCreateRoutines"></activity>
-        <activity android:name=".RecordWorkout" />
-        <activity android:name=".RepHandler" />
+        <activity android:name=".Progress"></activity>
+        <activity android:name=".ListForCreateRoutines" />
+        <activity android:name=".RecordWorkout"
+            />
+        <activity android:name=".RepHandler"
+            />
         <activity android:name=".CreateRoutines" />
-        <activity android:name=".Exercises_for_routines"/>
+        <activity android:name=".Exercises_for_routines" />
         <activity android:name=".User_details" />
         <activity android:name=".Profile" />
         <activity android:name=".routines" />
-        <activity android:name=".DetailActivity"
-            android:parentActivityName=".Exercises"/>
+        <activity
+            android:name=".DetailActivity"
+            android:parentActivityName=".Exercises" />
         <activity android:name=".Exercises" />
         <activity android:name=".Splash">
             <intent-filter>
@@ -39,12 +43,17 @@
             android:label="@string/title_activity_nav_main" />
         <activity android:name=".Register" />
 
-        <service android:name=".MessageService"
+        <service
+            android:name=".MessageService"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.google.android.gms.wearable.MESSAGE_RECEIVED" />
-                <data android:scheme="wear" android:host="*" android:pathPrefix="/my_path" />
+
+                <data
+                    android:host="*"
+                    android:pathPrefix="/my_path"
+                    android:scheme="wear" />
             </intent-filter>
         </service>
     </application>

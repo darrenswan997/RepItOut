@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DatabaseReference;
 
 public class nav_main_page extends AppCompatActivity {
 
@@ -17,6 +18,7 @@ public class nav_main_page extends AppCompatActivity {
     private ActionBarDrawerToggle t;
     private NavigationView nv;
 
+    public DatabaseReference dtbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +50,9 @@ public class nav_main_page extends AppCompatActivity {
                         break;
                     case R.id.nav_my_profile:
                         startActivity(new Intent(nav_main_page.this,Profile.class));
+                        break;
+                    case R.id.nav_progress:
+                        startActivity(new Intent(nav_main_page.this,Progress.class));
                         break;
                         default:
                             return true;

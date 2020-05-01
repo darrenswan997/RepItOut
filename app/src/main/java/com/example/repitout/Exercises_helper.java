@@ -1,14 +1,25 @@
 package com.example.repitout;
 
+import com.google.firebase.database.ServerValue;
+
+import java.util.HashMap;
 import java.util.Map;
 
 public class Exercises_helper {
     public String name;
     public String reps;
+    public HashMap<String, Object> timestamp;
+    public Long creationDate;
+    public Object time;
+
+    public Long getCreationDate() {
+        return creationDate;
+    }
 
     public Exercises_helper(String name, String reps) {
         this.name = name;
         this.reps = reps;
+        this.time = ServerValue.TIMESTAMP;
     }
 
     public String sets;
@@ -34,11 +45,10 @@ public class Exercises_helper {
         this.name = name;
     }
 
-    public Exercises_helper(String name, String reps, String sets, Map<String, String> exercises) {
+    public Exercises_helper(String name, String reps, HashMap<String, Object> timestamp) {
         this.name = name;
         this.reps = reps;
-        this.sets = sets;
-        this.exerciseMap = exercises;
+        this.timestamp = timestamp;
     }
 
     public Exercises_helper() {

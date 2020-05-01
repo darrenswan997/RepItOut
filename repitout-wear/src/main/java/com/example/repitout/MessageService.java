@@ -23,7 +23,7 @@ public class MessageService extends WearableListenerService {
             LocalBroadcastManager.getInstance(this).sendBroadcast(messageIntent);
 
         }
-        if (messageEvent.getPath().equals("/exercises")){
+        /*if (messageEvent.getPath().equals("/exercises")){
             final String exercisename = new String(messageEvent.getData());
             Intent messageIntent1 = new Intent();
             messageIntent1.setAction(Intent.ACTION_SEND);
@@ -33,6 +33,6 @@ public class MessageService extends WearableListenerService {
         }
         else {
             super.onMessageReceived(messageEvent);
-        }
+        }*/
     }
 }

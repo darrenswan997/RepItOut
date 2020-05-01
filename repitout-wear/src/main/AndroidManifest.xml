@@ -28,9 +28,6 @@
             android:value="true" />
 
         <activity
-            android:name="com.example.repitout.RecordedReps"
-            android:label="@string/title_activity_recorded_reps"/>
-        <activity
             android:name="com.example.repitout.counter"
             android:label="@string/title_activity_counter">
         </activity>

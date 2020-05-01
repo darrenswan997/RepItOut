@@ -14,7 +14,10 @@
             android:id="@+id/nav_my_profile"
             android:icon="@drawable/ic_my_profile"
             android:title="@string/menu_My_Profile" />
-
+        <item
+            android:id="@+id/nav_progress"
+            android:icon="@drawable/ic_progress"
+            android:title="@string/Menu_Progress"/>
     </group>
 
 

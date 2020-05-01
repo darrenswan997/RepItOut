@@ -49,7 +49,6 @@ public class CreateRoutines extends AppCompatActivity implements AdapterView.OnI
         setContentView(R.layout.activity_create_routines);
 
         saveDetails = findViewById(R.id.saveRoutine);
-        spinner = findViewById(R.id.Spinner);
         exercizes_TV = findViewById(R.id.excersizesTV);
         addExercises = findViewById(R.id.addExercisesBtn);
         days.add("Monday");

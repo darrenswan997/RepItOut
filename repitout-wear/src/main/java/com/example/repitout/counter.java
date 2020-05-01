@@ -16,13 +16,21 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
+import com.google.android.gms.wearable.Node;
+import com.google.android.gms.wearable.Wearable;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 public class counter extends WearableActivity implements SensorEventListener {
 
     private static final float DOWN_X_THRESHOLD = -4.82f;
+    private static final float Press_DOWN_X_THRESHOLD = 2.82f;
+    private static final float PRESS_UP_X_THRESHOLD = 3.82f;
     private static final float UP_X_THRESHOLD = 4.82f;
     private float xPrevious, yPrevious, zPrevious;
     private TextView mTextView;
@@ -58,16 +66,13 @@ public class counter extends WearableActivity implements SensorEventListener {
             @Override
             public void onClick(View v) {
                 //startActivity(new Intent(counter.this, RecordedReps.class));
-                saveReps(mCounter);
+                String s = counter_tv.getText().toString();
+                String dataPath = "/my_path";
+                new SendMessage(dataPath,s).start();
+                startActivity(new Intent(counter.this,MainActivity.class));
             }
         });
-        /*startBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               recording = true;
-                Toast.makeText(getBaseContext(),"Started Recording Reps", Toast.LENGTH_SHORT).show();
-            }
-        });*/
+
 
 
         mSensorManager =(SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -104,8 +109,8 @@ public class counter extends WearableActivity implements SensorEventListener {
     @Override
     public void onSensorChanged(SensorEvent event) {
         detectcurlMovement(event.values[0],event.values[1],event.values[2],event.timestamp);
-        detectpushMovement(event.values[0],event.values[1],event.values[2],event.timestamp);
-
+        detectOverHeadPressMovement(event.values[0],event.values[1],event.values[2],event.timestamp);
+        detectBenchMovement(event.values[0],event.values[1],event.values[2],event.timestamp);
     }
 
     @Override
@@ -127,7 +132,7 @@ public class counter extends WearableActivity implements SensorEventListener {
         }
     }
 
-    private void detectpushMovement(float xNewAccel, float yNewAccel, float zNewAccel, long timestamp) {
+    private void detectOverHeadPressMovement(float xNewAccel, float yNewAccel, float zNewAccel, long timestamp) {
         //y will be for pressing/pulling movement
         if ((xNewAccel <= DOWN_X_THRESHOLD)
                 || (xNewAccel >= UP_X_THRESHOLD)) {
@@ -135,6 +140,20 @@ public class counter extends WearableActivity implements SensorEventListener {
             if (timestamp - mLastTime < TIME_THRESHOLD_NS) {
                 // Hand is down when yValue is negative.
                 onRepDetected(xNewAccel <= DOWN_X_THRESHOLD);
+            }
+
+            mLastTime = timestamp;
+        }
+    }
+
+    private void detectBenchMovement(float xNewAccel, float yNewAccel, float zNewAccel, long timestamp) {
+        //y will be for pressing/pulling movement
+        if ((xNewAccel <= Press_DOWN_X_THRESHOLD)
+                || (xNewAccel >= PRESS_UP_X_THRESHOLD)) {
+
+            if (timestamp - mLastTime < TIME_THRESHOLD_NS) {
+                // Hand is down when yValue is negative.
+                onRepDetected(xNewAccel <= Press_DOWN_X_THRESHOLD);
             }
 
             mLastTime = timestamp;
@@ -169,12 +188,58 @@ public class counter extends WearableActivity implements SensorEventListener {
         counter_tv.setText(String.valueOf(mCounter));
     }
 
-    public void saveReps(int i){
+/*    public void saveReps(int i){
         savedReps= (String.valueOf(i));
         Intent intent = new Intent(counter.this, RecordedReps.class);
         intent.putExtra("reps", savedReps);
         startActivity(intent);
 
+
+    }*/
+
+    class SendMessage extends Thread {
+        String path;
+        String message;
+
+        //Constructor for sending information to the Data Layer
+        SendMessage(String p, String m) {
+            path = p;
+            message = m;
+        }
+
+        public void run() {
+
+            //Retrieve the connected devices//
+            Task<List<Node>> nodeListTask =
+                    Wearable.getNodeClient(getApplicationContext()).getConnectedNodes();
+            try {
+
+                //Block on a task and get the result synchronously
+
+                List<Node> nodes = Tasks.await(nodeListTask);
+                for (Node node : nodes) {
+
+                    //Send the message
+                    Task<Integer> sendMessageTask =
+                            Wearable.getMessageClient(counter.this).sendMessage(node.getId(), path, message.getBytes());
+
+                    try {
+
+                        Integer result = Tasks.await(sendMessageTask);
+
+                    } catch (ExecutionException exception) {
+
+                    } catch (InterruptedException exception) {
+
+                    }
+                }
+
+            } catch (ExecutionException exception) {
+
+            } catch (InterruptedException exception) {
+
+            }
+        }
     }
 
 }

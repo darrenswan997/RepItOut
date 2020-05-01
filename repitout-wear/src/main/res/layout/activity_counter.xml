@@ -18,13 +18,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:text="@string/reps"
             android:textColor="@color/black"
-            android:textSize="32sp" />
+            android:textSize="24sp" />
 
 
-            <TextView
+            <EditText
                 android:id="@+id/counterTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
                 android:layout_centerHorizontal="true"
                 android:text="0"
                 android:textColor="@color/black"
-                android:textSize="28sp" />
+                android:textSize="24sp" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -53,6 +53,12 @@
                 android:background="@drawable/round_button"
                 />
 
+            <Button
+                android:id="@+id/reset_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/reset_reps"
+                android:background="@drawable/round_button"/>
 
         </LinearLayout>
 
@@ -73,12 +79,7 @@
             android:background="@drawable/round_button"
             />
 
-            <Button
-                android:id="@+id/reset_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/reset_reps"
-                android:background="@drawable/round_button"/>
+
 
         </LinearLayout>
 
