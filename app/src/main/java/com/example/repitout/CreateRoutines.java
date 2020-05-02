@@ -51,6 +51,7 @@ public class CreateRoutines extends AppCompatActivity implements AdapterView.OnI
         saveDetails = findViewById(R.id.saveRoutine);
         exercizes_TV = findViewById(R.id.excersizesTV);
         addExercises = findViewById(R.id.addExercisesBtn);
+        spinner = findViewById(R.id.Spinner);
         days.add("Monday");
         days.add("Tuesday");
         days.add("Wednesday");
