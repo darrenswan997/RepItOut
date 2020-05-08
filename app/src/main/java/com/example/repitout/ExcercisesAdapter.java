@@ -66,11 +66,7 @@ public class ExcercisesAdapter extends RecyclerView.Adapter<ExcercisesAdapter.Ex
 
 
     }
-    public void removeAt(int pos){
-        exercisesList.remove(pos);
-        notifyItemRemoved(pos);
-        notifyItemRangeChanged(pos, exercisesList.size());
-    }
+
 
     @Override
     public int getItemCount() {

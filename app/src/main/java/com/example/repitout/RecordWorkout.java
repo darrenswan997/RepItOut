@@ -96,8 +96,8 @@ public class RecordWorkout extends AppCompatActivity {
         exercises= intent.getStringArrayListExtra("exercises");
 
 
-        //checks which activity it is getting the day name from and sets the textview accordingly
-        //also uses the vairable to query the firebase in order to get the correct exercises for the day
+        //checks day name from intents in different actvities and sets the textview accordingly
+        //also uses the variable to query the firebase in order to get the correct exercises for the day
         if (days != null ){
             finalday = days;
         }else if (dayOfWeek != null){
@@ -114,8 +114,8 @@ public class RecordWorkout extends AppCompatActivity {
         SharedPreferences sharedPreferences = this.getSharedPreferences("DayForDB", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("DayW",finalday);
-
         editor.apply();
+
 
 //send current day of the week to rephandler class to save data to correct db node
         Intent intent1 = new Intent(this, RepHandler.class);

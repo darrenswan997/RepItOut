@@ -77,35 +77,29 @@ public class RepHandler extends AppCompatActivity {
 
 
 
-        repTotal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String setsval = setsET.getText().toString();
-                int setv = Integer.parseInt(setsval);
-                String repsval = repsET.getText().toString();
-                int repsv = Integer.parseInt(repsval);
-                int total = (setv * repsv);
-                r = String.valueOf(total);
-                totalRep.setText(r);
+        repTotal.setOnClickListener(v -> {
+            String setsval = setsET.getText().toString();
+            int setv = Integer.parseInt(setsval);
+            String repsval = repsET.getText().toString();
+            int repsv = Integer.parseInt(repsval);
+            int total = (setv * repsv);
+            r = String.valueOf(total);
+            totalRep.setText(r);
 
-            }
         });
 
 
 
-        //Create a message handler//
+        //Create a message handler
 
-        myHandler = new Handler(new Handler.Callback() {
-            @Override
-            public boolean handleMessage(Message msg) {
-                Bundle stuff = msg.getData();
-                messageText(stuff.getString("messageText"));
-                return true;
-            }
+        myHandler = new Handler(msg -> {
+            Bundle stuff = msg.getData();
+            messageText(stuff.getString("messageText"));
+            return true;
         });
 
-        //Register to receive local broadcasts, which we'll be creating in the next step//
 
+        //Register to receive local broadcasts
         IntentFilter messageFilter = new IntentFilter(Intent.ACTION_SEND);
         Receiver messageReceiver = new Receiver();
         LocalBroadcastManager.getInstance(this).registerReceiver(messageReceiver, messageFilter);
@@ -153,8 +147,8 @@ public class RepHandler extends AppCompatActivity {
 
     public void talkClick(View v) {
 
-//Sending a message can block the main UI thread, so use a new thread//
-        new NewThread("/my_path", ("Exercise : " + q + "\n" + " Reps : " + r)).start();
+//Sending a message using a new thread
+        new NewThread("/my_path", ("Exercise : " + q + "\n" + " Reps : " + r)).start(); // sending exercise name and reps total
         Toast.makeText(this,"Goal reps sent to watch for " + q,Toast.LENGTH_SHORT).show();
     }
 
@@ -168,7 +162,7 @@ public class RepHandler extends AppCompatActivity {
     }
 
     class NewThread extends Thread {
-        String path, message, exc;
+        String path, message;
 
         //create constructor to send information to data layer
 
@@ -189,8 +183,7 @@ public class RepHandler extends AppCompatActivity {
                     //sending the message
                     Task<Integer> sendMessageTask =
                             Wearable.getMessageClient(RepHandler.this).sendMessage(node.getId(), path, message.getBytes());
-                    /*Task<Integer> sendExcTask =
-                            Wearable.getMessageClient(RepHandler.this).sendMessage(node.getId(), path, exc.getBytes());*/
+
                     try {
                         //block on a task and get the result synchronously
                         Integer result = Tasks.await(sendMessageTask);

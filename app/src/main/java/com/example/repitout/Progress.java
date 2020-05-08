@@ -55,7 +55,6 @@ public class Progress extends nav_main_page {
         dataArrayAdapter = new ArrayAdapter<>(Progress.this, android.R.layout.simple_list_item_1, data);
 
 
-
             query = FirebaseDatabase.getInstance().getReference("Workout")
                     .child(userID)
                     .child("Routine_History")
@@ -64,15 +63,12 @@ public class Progress extends nav_main_page {
             ;
 
 
-
             query.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     data.clear();
                     for (final DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         Exercises_helper helper = snapshot.getValue(Exercises_helper.class);
-                        /*String name = (String)snapshot.child("name").getValue();
-                        String reps = (String)snapshot.child("reps").getValue();*/
                         Long time = (Long)snapshot.child("time").getValue();
                         DateFormat dateFormat = DateFormat.getDateTimeInstance();
                         Date netDate = (new Date(time));

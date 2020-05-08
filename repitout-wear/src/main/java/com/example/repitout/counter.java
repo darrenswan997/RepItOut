@@ -29,7 +29,7 @@ import java.util.concurrent.TimeUnit;
 public class counter extends WearableActivity implements SensorEventListener {
 
     private static final float DOWN_X_THRESHOLD = -4.82f;
-    private static final float Press_DOWN_X_THRESHOLD = 2.82f;
+    private static final float Press_DOWN_X_THRESHOLD = 1.82f;
     private static final float PRESS_UP_X_THRESHOLD = 3.82f;
     private static final float UP_X_THRESHOLD = 4.82f;
     private float xPrevious, yPrevious, zPrevious;
@@ -46,7 +46,7 @@ public class counter extends WearableActivity implements SensorEventListener {
     public String savedReps;
 
 
-    // An up-down movement that takes more than 2 seconds will not be registered (in nanoseconds).
+    // An up-down movement that takes more than 5 seconds will not be registered (in nanoseconds).
     private static final long TIME_THRESHOLD_NS = TimeUnit.SECONDS.toNanos(5);
 
     private boolean firstUpdate = true;
@@ -160,10 +160,8 @@ public class counter extends WearableActivity implements SensorEventListener {
         }
     }
 
-    /**
-     * Called on detection of a successful down -> up or up -> down movement of hand.
-     */
-    //
+
+    //called when rep movement is detected
     private void onRepDetected(boolean handDown) {
         if (mHandDown != handDown) {
             mHandDown = handDown;
@@ -188,14 +186,7 @@ public class counter extends WearableActivity implements SensorEventListener {
         counter_tv.setText(String.valueOf(mCounter));
     }
 
-/*    public void saveReps(int i){
-        savedReps= (String.valueOf(i));
-        Intent intent = new Intent(counter.this, RecordedReps.class);
-        intent.putExtra("reps", savedReps);
-        startActivity(intent);
 
-
-    }*/
 
     class SendMessage extends Thread {
         String path;

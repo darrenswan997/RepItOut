@@ -66,13 +66,10 @@ public class CreateRoutines extends AppCompatActivity implements AdapterView.OnI
 
         exerciseMap = new HashMap<>();
 
-        addExercises.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(CreateRoutines.this,ListForCreateRoutines.class);
-                intent.putExtra("day",routine);
-                startActivity(intent);
-            }
+        addExercises.setOnClickListener(v -> {
+            Intent intent = new Intent(CreateRoutines.this,ListForCreateRoutines.class);
+            intent.putExtra("day",routine);
+            startActivity(intent);
         });
 
         //intent from listforcreateroutines

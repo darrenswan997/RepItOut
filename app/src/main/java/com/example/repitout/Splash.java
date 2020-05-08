@@ -24,12 +24,9 @@ public class Splash extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         imageView=findViewById(R.id.anim);
-        mRunnable = new Runnable() {
-            @Override
-            public void run() {
-                startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                //finish();
-            }
+        mRunnable = () -> {
+            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+            //finish();
         };
 
         mHandler = new Handler();

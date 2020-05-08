@@ -15,7 +15,6 @@
         android:layout_width="0dp"
         android:layout_height="match_parent">
 
-        //other code goes in here rest is just layout
 
 
     </RelativeLayout>

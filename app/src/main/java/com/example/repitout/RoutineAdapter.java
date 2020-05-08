@@ -52,8 +52,6 @@ class RoutineAdapter extends RecyclerView.Adapter<RoutineAdapter.ProductViewHold
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         routines_helper routines_helper_obj = routineList.get(position);
         holder.routine_name.setText(routines_helper_obj.name);
-       /* dateOnBind = ("" + (routines_helper_obj.getDay()) + "/" +(routines_helper_obj.getMonth()) + "/" +(routines_helper_obj.getYear()));
-        holder.date.setText("Date Created : "+ dateOnBind);*/
 
         holder.setItemClickListener(new ItemClickListener() {
             @Override
@@ -77,8 +75,7 @@ class RoutineAdapter extends RecyclerView.Adapter<RoutineAdapter.ProductViewHold
 
 
 
-    public class ProductViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnCreateContextMenuListener,
-            MenuItem.OnMenuItemClickListener {
+    public class ProductViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView routine_name, date;
         public ItemClickListener itemClickListener;
 
@@ -87,7 +84,7 @@ class RoutineAdapter extends RecyclerView.Adapter<RoutineAdapter.ProductViewHold
 
             routine_name = itemView.findViewById(R.id.routineNameCardVTv);
             itemView.setOnClickListener(this);
-            itemView.setOnCreateContextMenuListener(this);
+
         }
 
         @Override
@@ -98,24 +95,9 @@ class RoutineAdapter extends RecyclerView.Adapter<RoutineAdapter.ProductViewHold
             this.itemClickListener = ic;
         }
 
-        @Override
-        public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-            MenuItem actionItem = menu.add("Edit");
-            actionItem.setOnMenuItemClickListener(this);
-        }
-
-        @Override
-        public boolean onMenuItemClick(MenuItem item) {
-
-
-       return true;
-        }
 
 
     }
 
-    private void deleteItem(String routine){
 
-
-    }
 }

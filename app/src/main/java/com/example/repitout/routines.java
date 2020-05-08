@@ -34,10 +34,7 @@ public class routines extends nav_main_page {
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
     String userID = firebaseUser.getUid();
-    DatabaseReference dbWorkout;
     DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("workout");
-    DatabaseReference dbr = db.child(userID);
-
     RoutineAdapter adapter;
     List<routines_helper> routinesList;
 
@@ -56,18 +53,19 @@ public class routines extends nav_main_page {
         adapter=new RoutineAdapter(this, routinesList);
         rv.setAdapter(adapter);
 
+        //send user to the create routine page
         createRoutine = findViewById(R.id.createRoutine);
         createRoutine.setOnClickListener(v -> startActivity(new Intent(routines.this, CreateRoutines.class)));
 
-        dbWorkout = FirebaseDatabase.getInstance().getReference("Workout");
 
-        //dbWorkout.addListenerForSingleValueEvent(valueEventListener);
 
+        //query to get the correct folder in firebase
         Query query = FirebaseDatabase.getInstance().getReference("Workout")
                 .child(userID)
                 .child("Routines")
                 .orderByChild("name");
 
+        //add listner to database query if values change then update the recyclerview adapter
        query.addListenerForSingleValueEvent(valueEventListener);
 
     }
@@ -76,14 +74,14 @@ public class routines extends nav_main_page {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
             routinesList.clear();
-            if (dataSnapshot.exists()){
+            if (dataSnapshot.exists()){//if data exists in db location
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    String name = snapshot.getKey();
+                    String name = snapshot.getKey();//set string to db value
                     routines_helper helper = new routines_helper(name);
                     routinesList.add(helper);
 
                 }
-                adapter.notifyDataSetChanged();
+                adapter.notifyDataSetChanged();//update adapter with db updates
             }
         }
 
